@@ -6,7 +6,6 @@ on:
 env:
   GITEA_TOKEN: ${{ secrets.TOKEN }}
   GITEA_HOST: ${{ vars.HOST }}
-  NPM_SCOPE: ${{ vars.NPM_SCOPE }}
   NPM_EMAIL: ${{ vars.NPM_EMAIL }}
 
 jobs:
@@ -26,9 +25,8 @@ jobs:
         run: npm install -g @angular/cli
 
       - name: Add NPM-Token
-        working-directory: ./projects/baseline
         run: |
-          echo "@${NPM_SCOPE}:registry=https://${GITEA_HOST}/api/packages/baseline/npm/" > ~/.npmrc
+          echo "@stereov:registry=https://${GITEA_HOST}/api/packages/baseline/npm/" > ~/.npmrc
           echo "//${GITEA_HOST}/api/packages/baseline/npm/:_authToken=${GITEA_TOKEN}" >> ~/.npmrc
           echo "always-auth=true" >> ~/.npmrc
 
@@ -38,7 +36,7 @@ jobs:
 
       - name: Build Package
         run: |
-          ng build baseline
+          ng build angular-baseline
 
       - name: Build Test App
         run: |
@@ -46,8 +44,8 @@ jobs:
 
       - name: Build External Test App
         run: |
-          yarn build external-test-app --configuration production
+          yarn build test-app-ext --configuration production
 
       - name: Publish Package
-        working-directory: ./projects/baseline
+        working-directory: ./projects/angular-baseline
         run: yarn publish

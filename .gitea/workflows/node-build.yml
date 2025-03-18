@@ -35,7 +35,7 @@ jobs:
 
       - name: Build Package
         run: |
-          ng build baseline
+          ng build angular-baseline
 
       - name: Build Test App with Yarn
         run: |
@@ -43,4 +43,4 @@ jobs:
 
       - name: Build External Test App with Yarn
         run: |
-          yarn build external-test-app --configuration production
+          yarn build test-app-ext --configuration production

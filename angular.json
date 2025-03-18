@@ -3,23 +3,23 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "baseline": {
+    "angular-baseline": {
       "projectType": "library",
-      "root": "projects/baseline",
-      "sourceRoot": "projects/baseline/src",
+      "root": "projects/angular-baseline",
+      "sourceRoot": "projects/angular-baseline/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/baseline/ng-package.json"
+            "project": "projects/angular-baseline/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/baseline/tsconfig.lib.prod.json"
+              "tsConfig": "projects/angular-baseline/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/baseline/tsconfig.lib.json"
+              "tsConfig": "projects/angular-baseline/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -131,36 +131,36 @@
         }
       }
     },
-    "external-test-app": {
+    "test-app-ext": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
-      "root": "projects/external-test-app",
-      "sourceRoot": "projects/external-test-app/src",
+      "root": "projects/test-app-ext",
+      "sourceRoot": "projects/test-app-ext/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/external-test-app",
-            "index": "projects/external-test-app/src/index.html",
-            "browser": "projects/external-test-app/src/main.ts",
+            "outputPath": "dist/test-app-ext",
+            "index": "projects/test-app-ext/src/index.html",
+            "browser": "projects/test-app-ext/src/main.ts",
             "polyfills": [
               "zone.js"
             ],
-            "tsConfig": "projects/external-test-app/tsconfig.app.json",
+            "tsConfig": "projects/test-app-ext/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/external-test-app/public"
+                "input": "projects/test-app-ext/public"
               }
             ],
             "styles": [
-              "projects/external-test-app/src/styles.scss"
+              "projects/test-app-ext/src/styles.scss"
             ],
             "scripts": []
           },
@@ -192,10 +192,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "external-test-app:build:production"
+              "buildTarget": "test-app-ext:build:production"
             },
             "development": {
-              "buildTarget": "external-test-app:build:development"
+              "buildTarget": "test-app-ext:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -210,16 +210,16 @@
               "zone.js",
               "zone.js/testing"
             ],
-            "tsConfig": "projects/external-test-app/tsconfig.spec.json",
+            "tsConfig": "projects/test-app-ext/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/external-test-app/public"
+                "input": "projects/test-app-ext/public"
               }
             ],
             "styles": [
-              "projects/external-test-app/src/styles.scss"
+              "projects/test-app-ext/src/styles.scss"
             ],
             "scripts": []
           }
