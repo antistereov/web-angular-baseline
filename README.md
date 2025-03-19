@@ -1,59 +1,102 @@
-# UiBaseline
+# 📘 Using the Angular Baseline Library
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.6.
 
-## Development server
+## 📌 1. Importing Auth Routes into the Main App
 
-To start a local development server, run:
+The baseline library provides **authRoutes**, which you can directly integrate into your app.
 
-```bash
-ng serve
+### **1️⃣ Auth Routes in the Baseline Library**
+The routes are defined in the library:
+
+```typescript
+// auth.routes.ts (in the library)
+import { Routes } from '@angular/router';
+import { LoginComponent } from './login.component';
+
+export const authRoutes: Routes = [
+  { path: 'login', component: LoginComponent }
+];
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### **2️⃣ Using Auth Routes in the Main Project**
+Import the routes into your `app.routes.ts` in your project:
 
-## Code scaffolding
+```typescript
+// app.routes.ts (in the UI project)
+import { Routes } from '@angular/router';
+import { authRoutes } from '@my-org/angular-baseline/auth.routes';
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+export const routes: Routes = [
+  { path: 'auth', children: authRoutes },
+  { path: '**', redirectTo: 'auth/login' }
+];
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+➡ This makes all authentication pages from the baseline library accessible under `/auth/...`.
 
-```bash
-ng generate --help
+---
+
+## 📌 2. Setting and Overriding App Config
+The baseline library uses an **Injection Token (`APP_CONFIG`)** to configure environment variables such as API URLs.
+
+### **1️⃣ Config Interface & Token in the Library**
+
+```typescript
+// lib.config.ts (in the library)
+import { InjectionToken } from '@angular/core';
+
+export interface AppConfig {
+  apiBaseUrl: string;
+  enableLogging: boolean;
+}
+
+export const APP_CONFIG = new InjectionToken<AppConfig>('APP_CONFIG', {
+  providedIn: 'root',
+  factory: () => ({
+    apiBaseUrl: 'https://default-api.com', // Default value
+    enableLogging: false
+  })
+});
 ```
 
-## Building
+### **2️⃣ Using the Config in a Service**
 
-To build the project run:
+```typescript
+// api.service.ts (in the library)
+import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { APP_CONFIG, AppConfig } from '../environment';
 
-```bash
-ng build
+@Injectable({ providedIn: 'root' })
+export class ApiService {
+  private config = inject(APP_CONFIG);
+
+  constructor(private http: HttpClient) {}
+
+  getData() {
+    return this.http.get(`${this.config.apiBaseUrl}/data`);
+  }
+}
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### **3️⃣ Overriding Config in the Main Project**
 
-## Running unit tests
+In the **`app.config.ts`** of the UI project, you can override the values:
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+```typescript
+// app.config.ts (in the UI project)
+import { APP_CONFIG, AppConfig } from '@my-org/angular-baseline';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app/app.component';
+import { provideHttpClient } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
 
-```bash
-ng test
+export const appConfig: ApplicationConfig = {
+    providers: [
+        provideRouter(routes),
+        { provide: APP_CONFIG, useValue: { apiBaseUrl: 'http://localhost:8000', enableLogging: true }}
+    ]
+};
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+➡ This allows each project to set its own API URL without modifying the baseline library.

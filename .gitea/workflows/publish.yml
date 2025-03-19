@@ -47,5 +47,5 @@ jobs:
           yarn build test-app-ext --configuration production
 
       - name: Publish Package
-        working-directory: ./projects/angular-baseline
-        run: yarn publish
+        run: |
+            yarn workspace @stereov/angular-baseline publish

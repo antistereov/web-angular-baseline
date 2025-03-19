@@ -4,10 +4,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/app",
-    "types": [],
-    "paths": {
-      "@antistereov/baseline": ["../baseline/src/public-api.ts"]
-    }
+    "types": []
   },
   "files": [
     "src/main.ts"

@@ -1,0 +1,9 @@
+<div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <input
+            formControlName="email"
+            type="email"
+            [placeholder]="'common.email' | translate"
+        >
+    </form>
+</div>
