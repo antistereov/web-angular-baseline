@@ -5,7 +5,7 @@
     "compilerOptions": {
         "baseUrl": "./",
         "paths": {
-            "@baseline-int/*": ["projects/angular-baseline/src/lib/*"],
+            "@baseline/*": ["projects/angular-baseline/src/lib/*"],
             "@baseline-ext/*": ["dist/angular-baseline"]
         },
         "outDir": "./dist/out-tsc",

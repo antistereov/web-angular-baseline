@@ -1,15 +1,16 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map, Observable, tap} from 'rxjs';
-import {APP_CONFIG} from '../../core/lib.config';
-import {User} from '../../shared/models/user.model';
-import {DeviceService} from '../utils/device.service';
+import {APP_CONFIG} from '@baseline/core/lib.config';
+import {User} from '@baseline/shared/models/user.model';
+import {DeviceService} from '@baseline/auth/utils/device.service';
 import {Router} from '@angular/router';
 import {
     LoginCredentials,
     LoginRequest,
     LoginResponse,
-    RegisterInformation, RegisterUserRequest
+    RegisterInformation,
+    RegisterUserRequest
 } from '../../auth/models/user-session.model';
 import {UserService} from '../../shared/data-access/user.service';
 

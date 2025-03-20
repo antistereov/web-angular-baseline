@@ -1,9 +1,9 @@
+@use './variables';
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
-@import '_variables.scss';
 
 body {
-    font-size: $base-font-size;
-    font-family: $base-primary-font, sans-serif;
+    font-size: variables.$base-font-size;
+    font-family: variables.$base-primary-font, sans-serif;
 }
 
 h1, h2, h3 {

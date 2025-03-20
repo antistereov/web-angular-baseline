@@ -1,0 +1,10 @@
+<input
+    [type]="type"
+    [value]="value"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    [readonly]="readonly"
+    [class.focused]="isFocused"
+    (input)="onInput($event)"
+    (blur)="onTouched()"
+/>

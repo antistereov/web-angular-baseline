@@ -1,9 +1,14 @@
 <div>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <input
+    <form [formGroup]="form" (ngSubmit)="login()">
+        <base-input
             formControlName="email"
             type="email"
-            [placeholder]="'common.email' | translate"
-        >
+            [placeholder]="'email'"
+        />
+        <base-input
+            formControlName="password"
+            type="password"
+            [placeholder]="'password'"
+        />
     </form>
 </div>

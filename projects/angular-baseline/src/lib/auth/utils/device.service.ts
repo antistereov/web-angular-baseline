@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import platform from 'platform';
-import {DeviceInfoRequest} from '@baseline-int/shared/models/user.model';
+import {DeviceInfoRequest} from '@baseline/auth/models/user-session.model';
 
 @Injectable({
     providedIn: 'root'

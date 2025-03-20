@@ -2,8 +2,8 @@ import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import {APP_CONFIG} from '@baseline-int/core/lib.config';
-import {authInterceptor} from '@baseline-int/core/interceptors/auth.interceptor'
+import {APP_CONFIG} from '@baseline/core/lib.config';
+import {authInterceptor} from '@baseline/core/interceptors/auth.interceptor'
 import {provideHttpClient, withFetch, withInterceptors} from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {

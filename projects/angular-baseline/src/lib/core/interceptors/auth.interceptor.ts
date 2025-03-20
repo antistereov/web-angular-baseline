@@ -1,7 +1,7 @@
 import {HttpErrorResponse, HttpInterceptorFn} from '@angular/common/http';
 import {catchError, switchMap, throwError} from 'rxjs';
 import { inject } from '@angular/core';
-import {UserSessionService} from '../../auth/data-access/user-session.service';
+import {UserSessionService} from '@baseline/auth/data-access/user-session.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
     const userSessionService = inject(UserSessionService);
