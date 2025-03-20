@@ -1,10 +1,13 @@
-<input
-    [type]="type"
-    [value]="value"
-    [placeholder]="placeholder"
-    [disabled]="disabled"
-    [readonly]="readonly"
-    [class.focused]="isFocused"
-    (input)="onInput($event)"
-    (blur)="onTouched()"
-/>
+<div class="base-input-wrapper">
+    <input
+        [type]="type"
+        [value]="value"
+        [placeholder]="placeholder"
+        [disabled]="disabled"
+        [readonly]="readonly"
+        [class.focused]="isFocused"
+        (input)="onInput($event)"
+        (blur)="onTouched()"
+        class="base-input"
+    />
+</div>

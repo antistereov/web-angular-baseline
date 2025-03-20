@@ -1,13 +1,13 @@
-import {Component, forwardRef, Input} from '@angular/core';
-import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
+import {Component, forwardRef, inject, Input} from '@angular/core';
+import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {CommonModule} from '@angular/common';
+import {ColorSchemeService} from '@baseline/shared/utils/color-scheme.service';
 
 @Component({
     selector: 'base-input',
     imports: [
         CommonModule,
-        FormsModule,
-        ReactiveFormsModule
+        FormsModule
     ],
     templateUrl: './input.component.html',
     styleUrl: './input.component.scss',
@@ -26,6 +26,8 @@ export class InputComponent implements ControlValueAccessor {
     @Input() readonly: boolean = false;
 
     value: string = '';
+
+    private themeService = inject(ColorSchemeService);
 
     isFocused = false;
     onChange = (_: any) => {};

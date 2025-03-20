@@ -1,0 +1,37 @@
+<h1>These are my custom components</h1>
+
+<h2>Input</h2>
+
+<base-input/>
+<base-input
+    [placeholder]="'Placeholder'"
+/>
+<base-input
+    [placeholder]="'Disabled'"
+    [disabled]="true"
+/>
+
+<base-selector
+    [options]="[
+        { label: 'First',  value: 'first'},
+        { label: 'Second', value: 'second' },
+        { label: 'Third', value: 'third' }
+    ]"
+/>
+<base-selector
+    [placeholder]="'Placeholder'"
+    [options]="[
+        { label: 'First',  value: 'first'},
+        { label: 'Second', value: 'second' },
+        { label: 'Third', value: 'third' }
+    ]"
+/>
+<base-selector
+    [placeholder]="'Disabled'"
+    [disabled]="true"
+    [options]="[
+        { label: 'First',  value: 'first'},
+        { label: 'Second', value: 'second' },
+        { label: 'Third', value: 'third' }
+    ]"
+/>

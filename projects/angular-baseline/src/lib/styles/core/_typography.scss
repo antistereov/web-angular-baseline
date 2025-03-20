@@ -1,11 +1,17 @@
 @use './variables';
+@use './colors';
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
-body {
+body, body * {
     font-size: variables.$base-font-size;
-    font-family: variables.$base-primary-font, sans-serif;
+    font-family: variables.$base-primary-font,  sans-serif;
+    color: colors.$base-text-color;
 }
 
 h1, h2, h3 {
     font-weight: 600;
+}
+
+body.dark-mode, body.dark-mode * {
+    color: colors.$base-text-color-dark;
 }

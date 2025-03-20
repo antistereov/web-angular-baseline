@@ -1,26 +1,45 @@
 @use '../core/variables';
 @use '../core/colors';
 
-input {
+.base-input-wrapper {
+    position: relative;
+    display: inline-block;
     width: 100%;
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: variables.$base-input-border-radius;
-    transition: border-color 0.2s ease;
-    outline: none;
 }
 
-input:focus, input.focused {
-    border-color: colors.$base-primary-color-light;
-    box-shadow: 0 0 5px colors.$base-primary-color-light;
+.base-input {
+    width: 100%;
+    padding: 0.3rem 0.5rem;
 
-    body.dark-mode {
-        border-color: colors.$base-primary-color-dark;
-        box-shadow: 0 0 5px colors.$base-primary-color-dark;
+    font-size: 1rem;
+    outline: none;
+
+    transition: border-color 0.2s ease;
+
+    background-color: colors.$base-element-bg-color;
+    border: 1px solid colors.$base-border-color;
+    border-radius: variables.$base-element-border-radius;
+
+    &:focus {
+        border-color: colors.$base-primary-color;
+        box-shadow: 0 0 5px colors.$base-primary-color;
+    }
+
+    &:disabled {
+        background-color: colors.$base-disabled-color;
     }
 }
 
-input:disabled {
-    background-color: #f5f5f5;
-    cursor: not-allowed;
+body.dark-mode .base-input {
+    border: 1px solid colors.$base-border-color-dark;
+    background-color: colors.$base-element-bg-color-dark;
+
+    &:focus {
+        border-color: colors.$base-primary-color-dark;
+        box-shadow: 0 0 5px colors.$base-primary-color-dark;
+    }
+
+    &:disabled {
+        background-color: colors.$base-disabled-color-dark;
+    }
 }

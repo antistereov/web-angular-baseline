@@ -5,5 +5,9 @@ export const routes: Routes = [
     {
         path: 'auth',
         children: authRoutes
+    },
+    {
+        path: '',
+        loadComponent: () => import ('@baseline/demo/feature/demo.component').then(c => c.DemoComponent)
     }
 ];

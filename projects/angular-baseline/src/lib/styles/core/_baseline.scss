@@ -1,2 +1,13 @@
 @use './typography';
+@use './colors';
 @use '../components/base-input';
+@use '../components/base-selector';
+@use './variables';
+
+body {
+    background-color: colors.$base-background-color;
+
+    &.dark-mode {
+        background-color: colors.$base-background-color-dark;
+    }
+}

@@ -1,0 +1,42 @@
+@use '../core/colors';
+@use '../core/variables';
+
+.base-selector-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.base-selector {
+    width: 100%;
+    padding: 0.3rem 0.5rem;
+
+    cursor: pointer;
+
+    border-radius: variables.$base-element-border-radius;
+
+    border: 1px solid colors.$base-border-color;
+    background-color: colors.$base-element-bg-color;
+
+    &:disabled {
+        background-color: colors.$base-disabled-color;
+    }
+}
+
+.base-selector option {
+    background-color: colors.$base-element-bg-color;
+    padding: 0.3rem 0.5rem;
+
+    &:checked {
+        background-color: colors.$base-primary-color;
+    }
+}
+
+body.dark-mode .base-selector {
+    border: 1px solid colors.$base-border-color-dark;
+    background-color:  colors.$base-element-bg-color-dark;
+
+    &:disabled {
+        background-color: colors.$base-disabled-color-dark;
+    }
+}
