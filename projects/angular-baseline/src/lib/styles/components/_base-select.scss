@@ -1,29 +1,40 @@
 @use '../core/colors';
 @use '../core/variables';
+@use '@ng-select/ng-select/scss/ant.design.theme';
 
-.base-selector-wrapper {
-    position: relative;
-    display: inline-block;
+.ng-select-container {
     width: 100%;
-}
 
-.base-selector {
-    width: 100%;
-    padding: 0.3rem 0.5rem;
-
-    cursor: pointer;
-
-    border-radius: variables.$base-element-border-radius;
-
-    border: 1px solid colors.$base-border-color;
-    background-color: colors.$base-element-bg-color;
+    border: 0;
 
     &:disabled {
         background-color: colors.$base-disabled-color;
     }
 }
 
-.base-selector option {
+.ng-select-placeholder {
+    font-size: 1rem;
+}
+
+.ng-select.base-select {
+    font-size: 16px;
+    border-radius: variables.$base-element-border-radius;
+
+
+    border: 1px solid colors.$base-border-color;
+    background-color: colors.$base-element-bg-color;
+
+    &:focus, &.focus {
+        border-color: colors.$base-primary-color;
+        box-shadow: 0 0 5px colors.$base-primary-color;
+    }
+}
+
+.ng-value-container {
+
+}
+
+.base-select option {
     background-color: colors.$base-element-bg-color;
     padding: 0.3rem 0.5rem;
 
@@ -39,4 +50,8 @@ body.dark-mode .base-selector {
     &:disabled {
         background-color: colors.$base-disabled-color-dark;
     }
+}
+
+::ng-deep .ng-select {
+    font-size: 1rem;
 }

@@ -1,20 +1,15 @@
-import {Component, computed, EventEmitter, HostListener, Input, Output, signal} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {filter} from 'rxjs';
-import {FormsModule} from '@angular/forms';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgSelectComponent} from '@ng-select/ng-select';
 
 @Component({
   selector: 'base-selector',
     imports: [
-        CommonModule,
-        FormsModule,
         NgSelectComponent,
     ],
-  templateUrl: './selector.component.html',
-  styleUrl: './selector.component.scss'
+  templateUrl: './select.component.html',
+  styleUrl: './select.component.scss'
 })
-export class SelectorComponent<T> {
+export class SelectComponent<T> {
     @Input() options: { label: string, value: T }[] = [];
     @Input() placeholder: string = '';
     @Input() disabled: boolean = false;

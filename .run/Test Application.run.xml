@@ -6,7 +6,7 @@
       <script value="start" />
     </scripts>
     <arguments value="test-app" />
-    <node-interpreter value="project" />
+    <node-interpreter value="$APPLICATION_CONFIG_DIR$/node/versions/22.14.0/bin/node" />
     <envs />
     <method v="2" />
   </configuration>
