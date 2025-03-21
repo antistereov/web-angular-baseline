@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {NgSelectComponent} from '@ng-select/ng-select';
+import {Select} from 'primeng/select';
 
 @Component({
   selector: 'base-selector',
     imports: [
-        NgSelectComponent,
+        Select
     ],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss'

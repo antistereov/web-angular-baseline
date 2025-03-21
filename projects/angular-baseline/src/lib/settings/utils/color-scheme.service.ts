@@ -30,6 +30,7 @@ export class ColorSchemeService implements OnDestroy {
         this.colorScheme.set(mode);
         localStorage.setItem('color-scheme', mode);
         this.applyColorScheme(mode);
+        console.log(`Set color scheme to ${this.colorScheme()}`)
     }
 
     private loadColorScheme(): 'light' | 'dark' | 'system' {
@@ -51,6 +52,7 @@ export class ColorSchemeService implements OnDestroy {
         const prefersDark = this.getSystemColorScheme() === 'dark';
         const isDark = mode === 'dark' || (mode === 'system' && prefersDark);
 
+        document.querySelector('html')?.classList.toggle('dark-mode', isDark);
         document.body.classList.toggle('dark-mode', isDark);
     }
 }
