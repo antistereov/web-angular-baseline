@@ -15,9 +15,11 @@
     [dataKey]="dataKey"
     [autofocus]="autofocus"
     (onOptionClick)="onOptionClick.emit($event)"
-    (onChange)="onChange.emit($event)"
+    (onChange)="handleChange($event)"
+    [(ngModel)]="value"
 >
-    <ng-template *ngIf="useIcons" #item let-item>
-        <lucide-icon [img]="item.icon" class="base-icon"></lucide-icon>
+    <ng-template #item let-item>
+        <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }">
+        </ng-container>
     </ng-template>
 </p-select-button>

@@ -2,14 +2,20 @@ import {Component, inject} from '@angular/core';
 import {FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UserSessionService} from '@baseline/auth/data-access/user-session.service';
 import {Router} from '@angular/router';
-import {catchError, Observable, of, switchMap} from 'rxjs';
+import {catchError, of, switchMap} from 'rxjs';
 import {InputComponent} from '@baseline/shared/ui/input/input.component';
+import {CardComponent} from '@baseline/shared/ui/card/card.component';
+import {ButtonComponent} from '@baseline/shared/ui/button/button.component';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'base-login',
     imports: [
         ReactiveFormsModule,
-        InputComponent
+        InputComponent,
+        CardComponent,
+        ButtonComponent,
+        NgIf
     ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -29,13 +35,13 @@ export class LoginComponent {
         })
     }
 
-    login(): Observable<boolean> {
+    login() {
         if (!this.form.valid) {
-            return of(true)
+            return;
         }
 
         this.loading = true;
-        return this.userSessionService.login(this.form.value)
+        this.userSessionService.login(this.form.value)
             .pipe(
                 switchMap(() => {
                     this.router.navigate(['/']).then();
@@ -47,6 +53,7 @@ export class LoginComponent {
                     return of(false)
                 })
             )
+            .subscribe()
     }
 
 }

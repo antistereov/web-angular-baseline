@@ -1,15 +1,40 @@
-<div>
-    <form [formGroup]="form" (ngSubmit)="login()">
-        <base-input
-            formControlName="email"
-            type="email"
-            [placeholder]="'email'"
-        />
-        <base-input
-            formControlName="password"
-            type="password"
-            [placeholder]="'password'"
-            [disabled]="true"
-        />
-    </form>
+<div class="h-full flex flex-col justify-center ">
+    <base-card class="max-w-md m-auto">
+        <ng-template #title>
+            Login
+        </ng-template>
+        <ng-template #content>
+            <form
+                class="flex flex-col items-center gap-2"
+                [formGroup]="form"
+                (ngSubmit)="login()"
+            >
+                <base-input
+                    formControlName="email"
+                    type="email"
+                    class="w-full"
+                    [placeholder]="'email'"
+                    [invalid]="form.getError('invalid') || (form.controls['email'].invalid && form.controls['email'].touched)"
+                />
+                <p class="text-red-600 text-sm" *ngIf="form.controls['email'].invalid && form.controls['email'].touched">
+                    Bitte geben Sie eine gültige E-Mail-Adresse ein.
+                </p>
+                <base-input
+                    formControlName="password"
+                    type="password"
+                    class="w-full"
+                    [placeholder]="'password'"
+                    [invalid]="form.getError('invalid')"
+                />
+                <base-button
+                    type="submit"
+                    label="Submit"
+                    [disabled]="loading || form.invalid"
+                    [loading]="loading"
+                />
+                <p class="text-red-600" *ngIf="form.getError('invalid')">Wrong credentials.</p>
+            </form>
+        </ng-template>
+    </base-card>
+
 </div>

@@ -1,0 +1,32 @@
+<p-button
+    class="base-button"
+    [type]="type"
+    [icon]="icon"
+    [badge]="badge"
+    [label]="label"
+    [disabled]="disabled"
+    [loading]="loading"
+    [loadingIcon]="loadingIcon"
+    [raised]="raised"
+    [rounded]="rounded"
+    [text]="text"
+    [severity]="severity"
+    [outlined]="outlined"
+    [link]="link"
+    [tabindex]="tabindex"
+    [size]="size"
+    [variant]="variant"
+    [style]="style"
+    [styleClass]="class"
+    [badgeSeverity]="badgeSeverity"
+    [ariaLabel]="ariaLabel"
+    [autofocus]="autofocus"
+    [fluid]="fluid"
+    [buttonProps]="buttonProps"
+
+    (onClick)="onClick.emit($event)"
+    (onFocus)="onFocus.emit($event)"
+    (onBlur)="onBlur.emit($event)"
+>
+    <ng-content></ng-content>
+</p-button>

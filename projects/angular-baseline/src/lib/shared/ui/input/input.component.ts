@@ -1,7 +1,6 @@
-import {Component, forwardRef, inject, Input} from '@angular/core';
+import {Component, forwardRef, Input} from '@angular/core';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {CommonModule} from '@angular/common';
-import {ColorSchemeService} from '@baseline/settings/utils/color-scheme.service';
 import {InputText} from 'primeng/inputtext';
 
 @Component({
@@ -9,10 +8,9 @@ import {InputText} from 'primeng/inputtext';
     imports: [
         CommonModule,
         FormsModule,
-        InputText
+        InputText,
     ],
     templateUrl: './input.component.html',
-    styleUrl: './input.component.scss',
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -26,6 +24,8 @@ export class InputComponent implements ControlValueAccessor {
     @Input() placeholder: string = '';
     @Input() disabled: boolean = false;
     @Input() readonly: boolean = false;
+    @Input() class?: string;
+    @Input() invalid: boolean = false;
 
     value: string = '';
 
@@ -54,4 +54,5 @@ export class InputComponent implements ControlValueAccessor {
         this.value = input.value;
         this.onChange(input.value);
     }
+
 }

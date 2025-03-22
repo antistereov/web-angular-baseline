@@ -30,7 +30,6 @@ export class ColorSchemeService implements OnDestroy {
         this.colorScheme.set(mode);
         localStorage.setItem('color-scheme', mode);
         this.applyColorScheme(mode);
-        console.log(`Set color scheme to ${this.colorScheme()}`)
     }
 
     private loadColorScheme(): 'light' | 'dark' | 'system' {

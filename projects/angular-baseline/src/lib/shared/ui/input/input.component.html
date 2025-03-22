@@ -1,14 +1,12 @@
-<div class="base-input-wrapper">
-    <input
-        pInputText
-        [type]="type"
-        [value]="value"
-        [placeholder]="placeholder"
-        [disabled]="disabled"
-        [readonly]="readonly"
-        [class.focused]="isFocused"
-        (input)="onInput($event)"
-        (blur)="onTouched()"
-        class="base-input"
-    />
-</div>
+<input
+    [class]="invalid ? 'ng-invalid ng-dirty ' + class : class"
+    pInputText
+    [type]="type"
+    [value]="value"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    [readonly]="readonly"
+    [class.focused]="isFocused"
+    (input)="onInput($event)"
+    (blur)="onTouched()"
+/>

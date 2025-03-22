@@ -38,11 +38,6 @@
         },
         "test-app": {
             "projectType": "application",
-            "schematics": {
-                "@schematics/angular:component": {
-                    "style": "scss"
-                }
-            },
             "root": "projects/test-app",
             "sourceRoot": "projects/test-app/src",
             "prefix": "app",
@@ -57,7 +52,7 @@
                             "zone.js"
                         ],
                         "tsConfig": "projects/test-app/tsconfig.app.json",
-                        "inlineStyleLanguage": "scss",
+                        "inlineStyleLanguage": "css",
                         "assets": [
                             {
                                 "glob": "**/*",
@@ -65,14 +60,10 @@
                             }
                         ],
                         "styles": [
-                            "projects/test-app/src/styles.scss"
+                            "projects/test-app/src/styles.css",
+                            "projects/angular-baseline/src/lib/styles/styles.css"
                         ],
-                        "scripts": [],
-                        "stylePreprocessorOptions": {
-                            "includePaths": [
-                                "projects/angular-baseline/src/lib/styles"
-                            ]
-                        }
+                        "scripts": []
                     },
                     "configurations": {
                         "production": {

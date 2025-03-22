@@ -10,7 +10,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         withCredentials: true
     });
 
-    const excludedEndpoints = ['/user/refresh'];
+    const excludedEndpoints = ['/user/refresh', '/user/login'];
 
     if (excludedEndpoints.some(endpoint => req.url.includes(endpoint))) {
         return next(authReq);

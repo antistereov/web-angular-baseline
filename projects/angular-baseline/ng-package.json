@@ -1,9 +1,9 @@
 {
-  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/angular-baseline",
-  "lib": {
-    "entryFile": "src/public-api.ts"
-  },
+    "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+    "dest": "../../dist/angular-baseline",
+    "lib": {
+        "entryFile": "src/public-api.ts"
+    },
     "assets": [
         "src/lib/styles"
     ]

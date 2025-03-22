@@ -2,6 +2,8 @@
     [options]="colorSchemes"
     [ngModel]="value()"
     (onChange)="onChange($event)"
-    [useIcons]="true"
 >
+    <ng-template #item let-item>
+        <i [class]="item.icon"></i>
+    </ng-template>
 </base-select-button>

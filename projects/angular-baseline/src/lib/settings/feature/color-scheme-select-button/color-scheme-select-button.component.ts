@@ -1,25 +1,26 @@
-import {Component, computed, inject, OnInit} from '@angular/core';
+import {Component, computed, inject} from '@angular/core';
 import {ColorSchemeService} from '@baseline/settings/utils/color-scheme.service';
-import {LucideAngularModule, SunIcon, MoonIcon, LaptopMinimalIcon} from 'lucide-angular';
 import {FormsModule} from '@angular/forms';
-import {SelectButton, SelectButtonChangeEvent} from 'primeng/selectbutton';
+import {SelectButtonChangeEvent} from 'primeng/selectbutton';
 import {SelectButtonComponent} from '@baseline/shared/ui/select-button/select-button.component';
+import {
+    ColorSchemeOption
+} from '@baseline/settings/feature/color-scheme-select-button/color-scheme-select-button.model';
 
 @Component({
-  selector: 'base-color-scheme-select-button',
+    selector: 'base-color-scheme-select-button',
     imports: [
-        LucideAngularModule,
         FormsModule,
         SelectButtonComponent,
     ],
-  templateUrl: './color-scheme-select-button.component.html',
-  styleUrl: './color-scheme-select-button.component.css'
+    templateUrl: './color-scheme-select-button.component.html',
+    styleUrl: './color-scheme-select-button.component.css'
 })
-export class ColorSchemeSelectButtonComponent implements OnInit {
-    colorSchemes = [
-        { icon: SunIcon, colorScheme: 'light' },
-        { icon: MoonIcon, colorScheme: 'dark' },
-        { icon: LaptopMinimalIcon, colorScheme: 'system' }
+export class ColorSchemeSelectButtonComponent {
+    colorSchemes: ColorSchemeOption[] = [
+        { icon: 'pi pi-sun', colorScheme: 'light' },
+        { icon: 'pi pi-moon', colorScheme: 'dark' },
+        { icon: 'pi pi-desktop', colorScheme: 'system' }
     ]
 
     private colorSchemeService = inject(ColorSchemeService);
@@ -29,9 +30,6 @@ export class ColorSchemeSelectButtonComponent implements OnInit {
         return this.colorSchemes.find(scheme => scheme.colorScheme === this.colorScheme());
     });
 
-    ngOnInit() {
-        console.log(this.value);
-    }
     onChange(event: SelectButtonChangeEvent) {
         this.colorSchemeService.setColorScheme(event.value.colorScheme);
     }
