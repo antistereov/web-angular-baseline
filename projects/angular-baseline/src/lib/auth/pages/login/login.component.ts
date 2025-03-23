@@ -7,6 +7,7 @@ import {InputComponent} from '@baseline/shared/ui/input/input.component';
 import {CardComponent} from '@baseline/shared/ui/card/card.component';
 import {ButtonComponent} from '@baseline/shared/ui/button/button.component';
 import {NgIf} from '@angular/common';
+import {APP_CONFIG} from '@baseline-ext/angular-baseline/core/lib.config';
 
 @Component({
   selector: 'base-login',
@@ -17,13 +18,13 @@ import {NgIf} from '@angular/common';
         ButtonComponent,
         NgIf
     ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  templateUrl: './login.component.html'
 })
 export class LoginComponent {
     private fb = inject(NonNullableFormBuilder);
     private userSessionService = inject(UserSessionService);
     private router = inject(Router);
+    private appConfig = inject(APP_CONFIG);
 
     form: FormGroup;
     loading: boolean = false;
@@ -35,6 +36,18 @@ export class LoginComponent {
         })
     }
 
+    get email() {
+        return this.form.controls['email'];
+    }
+
+    get password() {
+        return this.form.controls['password'];
+    }
+
+    get invalidAndTouched() {
+        return (this.password.invalid && this.password.touched) || (this.email.invalid && this.email.touched);
+    }
+
     login() {
         if (!this.form.valid) {
             return;
@@ -44,7 +57,7 @@ export class LoginComponent {
         this.userSessionService.login(this.form.value)
             .pipe(
                 switchMap(() => {
-                    this.router.navigate(['/']).then();
+                    this.router.navigate([this.appConfig.loginRedirectUrl]).then();
                     return of(true);
                 }),
                 catchError(() => {
@@ -55,7 +68,6 @@ export class LoginComponent {
             )
             .subscribe()
     }
-
 }
 
 export interface LoginCredentialsForm {

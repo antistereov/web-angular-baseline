@@ -26,6 +26,8 @@ export class InputComponent implements ControlValueAccessor {
     @Input() readonly: boolean = false;
     @Input() class?: string;
     @Input() invalid: boolean = false;
+    @Input() displayWarning: boolean = false;
+    @Input() warning?: string;
 
     value: string = '';
 

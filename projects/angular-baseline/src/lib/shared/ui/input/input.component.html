@@ -1,5 +1,5 @@
 <input
-    [class]="invalid ? 'ng-invalid ng-dirty ' + class : class"
+    [class]="(invalid ? 'ng-invalid ng-dirty' : '') + ' w-full'"
     pInputText
     [type]="type"
     [value]="value"
@@ -10,3 +10,4 @@
     (input)="onInput($event)"
     (blur)="onTouched()"
 />
+<p *ngIf="displayWarning && warning" class="warning-text">{{ warning }}</p>

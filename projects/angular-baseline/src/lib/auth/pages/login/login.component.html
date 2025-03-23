@@ -1,5 +1,5 @@
 <div class="h-full flex flex-col justify-center ">
-    <base-card class="max-w-md m-auto">
+    <base-card class="max-w-md min-w-sm m-auto">
         <ng-template #title>
             Login
         </ng-template>
@@ -9,22 +9,25 @@
                 [formGroup]="form"
                 (ngSubmit)="login()"
             >
+                <label for="email" class="w-full">Email</label>
                 <base-input
+                    id="email"
                     formControlName="email"
                     type="email"
                     class="w-full"
-                    [placeholder]="'email'"
-                    [invalid]="form.getError('invalid') || (form.controls['email'].invalid && form.controls['email'].touched)"
+                    [invalid]="form.getError('invalid') || invalidAndTouched"
+                    [warning]="'Please enter a valid email.'"
+                    [displayWarning]="invalidAndTouched"
                 />
-                <p class="text-red-600 text-sm" *ngIf="form.controls['email'].invalid && form.controls['email'].touched">
-                    Bitte geben Sie eine gültige E-Mail-Adresse ein.
-                </p>
+                <label for="password" class="w-full">Password</label>
                 <base-input
+                    id="password"
                     formControlName="password"
                     type="password"
                     class="w-full"
-                    [placeholder]="'password'"
-                    [invalid]="form.getError('invalid')"
+                    [invalid]="form.getError('invalid') || invalidAndTouched"
+                    [warning]="'Please enter your password.'"
+                    [displayWarning]="invalidAndTouched"
                 />
                 <base-button
                     type="submit"
