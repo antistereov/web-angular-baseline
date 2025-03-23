@@ -6,6 +6,8 @@ import {
 } from '@baseline/settings/feature/color-scheme-select-button/color-scheme-select-button.component';
 import {ButtonComponent} from '@baseline/shared/ui/button/button.component';
 import {CardComponent} from '@baseline/shared/ui/card/card.component';
+import {LanguageSelectComponent} from '@baseline/settings/feature/language-select/language-select.component';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'base-demo',
@@ -15,6 +17,8 @@ import {CardComponent} from '@baseline/shared/ui/card/card.component';
         ColorSchemeSelectButtonComponent,
         ButtonComponent,
         CardComponent,
+        LanguageSelectComponent,
+        TranslatePipe,
     ],
   templateUrl: './demo.component.html'
 })

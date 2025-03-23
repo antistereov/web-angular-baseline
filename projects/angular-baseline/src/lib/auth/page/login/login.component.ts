@@ -1,35 +1,50 @@
-import {Component, inject} from '@angular/core';
+import {Component, effect, inject} from '@angular/core';
 import {FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
-import {UserSessionService} from '@baseline/auth/data-access/user-session.service';
+import {AuthService} from '@baseline/auth/data-access/auth.service';
 import {Router} from '@angular/router';
 import {catchError, of, switchMap} from 'rxjs';
 import {InputComponent} from '@baseline/shared/ui/input/input.component';
-import {CardComponent} from '@baseline/shared/ui/card/card.component';
 import {ButtonComponent} from '@baseline/shared/ui/button/button.component';
 import {NgIf} from '@angular/common';
-import {APP_CONFIG} from '@baseline-ext/angular-baseline/core/lib.config';
+import {AuthCardComponent} from '@baseline/auth/ui/auth-card/auth-card.component';
+import {BASELINE_CONFIG} from '@baseline/core/config/base.config';
+import {SkeletonComponent} from '@baseline/shared/ui/skeleton/skeleton.component';
+import {UserService} from '@baseline/shared/data-access/user.service';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'base-login',
     imports: [
         ReactiveFormsModule,
         InputComponent,
-        CardComponent,
         ButtonComponent,
-        NgIf
+        NgIf,
+        AuthCardComponent,
+        SkeletonComponent,
+        TranslatePipe
     ],
   templateUrl: './login.component.html'
 })
 export class LoginComponent {
     private fb = inject(NonNullableFormBuilder);
-    private userSessionService = inject(UserSessionService);
+    private authService = inject(AuthService);
+    private userService = inject(UserService);
     private router = inject(Router);
-    private appConfig = inject(APP_CONFIG);
+    private appConfig = inject(BASELINE_CONFIG);
+
+    userLoaded = this.userService.userLoaded;
+    user = this.userService.user;
 
     form: FormGroup;
     loading: boolean = false;
 
     constructor() {
+        effect(() => {
+            if (this.user()) {
+                this.router.navigate([this.appConfig.auth.redirect.login]).then();
+            }
+        })
+
         this.form = this.fb.group<LoginCredentialsForm>({
             email: this.fb.control('', [Validators.required, Validators.email]),
             password: this.fb.control('', [Validators.required])
@@ -54,10 +69,10 @@ export class LoginComponent {
         }
 
         this.loading = true;
-        this.userSessionService.login(this.form.value)
+        this.authService.login(this.form.value)
             .pipe(
                 switchMap(() => {
-                    this.router.navigate([this.appConfig.loginRedirectUrl]).then();
+                    this.router.navigate([this.appConfig.auth.redirect.login]).then();
                     return of(true);
                 }),
                 catchError(() => {

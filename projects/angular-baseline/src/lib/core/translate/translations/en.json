@@ -1,0 +1,28 @@
+{
+    "auth": {
+        "fields": {
+            "email": "Email",
+            "password": "Password",
+            "name": "Name"
+        },
+        "warnings": {
+            "email": "Please enter a valid email.",
+            "password": "Please enter a password.",
+            "name": "Please enter your name."
+        },
+        "pages": {
+            "login": {
+                "title": "Login",
+                "submit": "Login",
+                "warning": "The email or password you entered is wrong."
+            },
+            "register": {
+                "title": "Register",
+                "submit": "Register"
+            }
+        }
+    },
+    "demo": {
+        "title": "These are my custom components"
+    }
+}

@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {map, Observable, tap} from 'rxjs';
-import {APP_CONFIG} from '@baseline/core/lib.config';
+import {catchError, map, Observable, of, tap} from 'rxjs';
+import {BASELINE_CONFIG} from '@baseline/core/config/base.config';
 import {User} from '@baseline/shared/models/user.model';
 import {DeviceService} from '@baseline/auth/utils/device.service';
 import {Router} from '@angular/router';
@@ -11,25 +11,40 @@ import {
     LoginResponse,
     RegisterInformation,
     RegisterUserRequest
-} from '../../auth/models/user-session.model';
+} from '@baseline/auth/model/user-session.model';
 import {UserService} from '../../shared/data-access/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserSessionService {
+export class AuthService {
     private httpClient = inject(HttpClient);
     private deviceService = inject(DeviceService);
     private router = inject(Router);
     private userService = inject(UserService);
 
-    private apiBaseUrl = inject(APP_CONFIG).apiBaseUrl;
+    private apiBaseUrl = inject(BASELINE_CONFIG).apiBaseUrl;
 
-    getUser(): Observable<User> {
+    constructor() {
+
+    }
+
+    initializeUser(): Observable<User | undefined> {
         return this.httpClient
             .get<User>(`${this.apiBaseUrl}/user/me`)
             .pipe(
-                tap(user => this.userService.setUser(user))
+                tap(user => {
+                    this.userService.setUser(user);
+                    this.userService.setUserLoaded(true);
+
+                    if (!user.emailVerified) {
+                        this.router.navigate(['/auth/verify-email']).then();
+                    }
+                }),
+                catchError(() => {
+                    this.userService.setUserLoaded(true);
+                    return of(undefined);
+                })
             )
     }
 

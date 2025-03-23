@@ -1,0 +1,15 @@
+<div class="h-full flex flex-col justify-center ">
+    <base-card class="max-w-md min-w-sm m-auto">
+        <ng-template #title>
+            <ng-container *ngIf="loaded; else titleSkeleton">
+                {{ cardTitle }}
+            </ng-container>
+            <ng-template #titleSkeleton>
+                <base-skeleton width="5rem" height="2rem"/>
+            </ng-template>
+        </ng-template>
+        <ng-template #content>
+            <ng-content></ng-content>
+        </ng-template>
+    </base-card>
+</div>

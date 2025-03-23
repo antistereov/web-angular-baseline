@@ -4,5 +4,8 @@
     [options]="options"
     [disabled]="disabled"
     [styleClass]="class"
+    (onChange)="onSelect($event)"
+    [(ngModel)]="value"
+    [optionLabel]="optionLabel"
 >
 </p-select>

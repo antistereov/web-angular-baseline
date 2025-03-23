@@ -1,1 +1,7 @@
-<p>language-select works!</p>
+<base-select
+    [options]="languages"
+    [optionLabel]="'name'"
+    [ngModel]="selectedLanguage"
+    (onChange)="setLanguage($event.value.code)"
+>
+</base-select>

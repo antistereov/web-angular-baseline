@@ -5,17 +5,26 @@ import {User} from '@baseline/shared/models/user.model';
   providedIn: 'root'
 })
 export class UserService {
-    private user = signal<User | undefined>(undefined);
+    private userSignal = signal<User | undefined>(undefined);
+    private userLoadedSignal = signal<boolean>(false);
 
     setUser(user: User | undefined): void {
-        this.user.set(user);
+        this.userSignal.set(user);
     }
 
-    getUser(): Signal<User | undefined> {
-        return this.user;
+    get user(): Signal<User | undefined> {
+        return this.userSignal;
     }
 
     clearUser(): void {
-        this.user.set(undefined);
+        this.userSignal.set(undefined);
+    }
+
+    setUserLoaded(userLoaded: boolean) {
+        this.userLoadedSignal.set(userLoaded);
+    }
+
+    get userLoaded(): Signal<boolean> {
+        return this.userLoadedSignal;
     }
 }

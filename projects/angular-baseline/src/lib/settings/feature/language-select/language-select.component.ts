@@ -1,11 +1,23 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
+import {SelectComponent} from '@baseline/shared/ui/select/select.component';
+import {FormsModule} from '@angular/forms';
+import {LanguageService} from '@baseline/settings/utils/language.service';
 
 @Component({
   selector: 'base-language-select',
-  imports: [],
-  templateUrl: './language-select.component.html',
-  styleUrl: './language-select.component.css'
+    imports: [
+        SelectComponent,
+        FormsModule
+    ],
+  templateUrl: './language-select.component.html'
 })
 export class LanguageSelectComponent {
+    private languageService = inject(LanguageService);
 
+    selectedLanguage = this.languageService.selectedLanguage;
+    languages = this.languageService.languages;
+
+    setLanguage(lang: string) {
+        this.languageService.setLanguage(lang);
+    }
 }

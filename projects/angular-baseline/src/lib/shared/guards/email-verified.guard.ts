@@ -1,13 +1,13 @@
 import {CanActivateFn, Router} from '@angular/router';
 import {inject} from '@angular/core';
-import {UserSessionService} from '../../auth/data-access/user-session.service';
+import {AuthService} from '../../auth/data-access/auth.service';
 import {catchError, of, switchMap} from 'rxjs';
 
 export const emailVerifiedGuard: CanActivateFn = () => {
-    const userSessionService = inject(UserSessionService);
+    const userSessionService = inject(AuthService);
     const router = inject(Router);
 
-    return userSessionService.getUser().pipe(
+    return userSessionService.initializeUser().pipe(
         switchMap(user => {
             if (!user.emailVerified) {
                 router.navigate(['/auth/verify-email']).then();

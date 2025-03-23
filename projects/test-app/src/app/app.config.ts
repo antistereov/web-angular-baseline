@@ -2,12 +2,15 @@ import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import {APP_CONFIG} from '@baseline/core/lib.config';
+import {provideBaselineConfig} from '@baseline/core/config/base.config';
 import {authInterceptor} from '@baseline/core/interceptors/auth.interceptor'
 import {provideHttpClient, withFetch, withInterceptors} from '@angular/common/http';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {providePrimeNG} from 'primeng/config';
 import {primeConfig} from '@baseline/core/theme/prime.config';
+import {provideErrorHandler} from '@baseline/core/error/error.provider';
+import {MessageService} from 'primeng/api';
+import {provideTranslateService} from '@baseline/core/translate/translate-provider';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,8 +20,11 @@ export const appConfig: ApplicationConfig = {
           withFetch(),
           withInterceptors([authInterceptor])
       ),
-      { provide: APP_CONFIG, useValue: { apiBaseUrl: 'http://localhost:8000', enableLogging: true }},
+      provideBaselineConfig(),
       provideAnimationsAsync(),
-      providePrimeNG(primeConfig)
+      providePrimeNG(primeConfig),
+      provideErrorHandler(),
+      MessageService,
+      provideTranslateService()
   ]
 };

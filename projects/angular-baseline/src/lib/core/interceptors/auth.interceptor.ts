@@ -1,10 +1,10 @@
 import {HttpErrorResponse, HttpInterceptorFn} from '@angular/common/http';
 import {catchError, switchMap, throwError} from 'rxjs';
 import { inject } from '@angular/core';
-import {UserSessionService} from '@baseline/auth/data-access/user-session.service';
+import {AuthService} from '@baseline/auth/data-access/auth.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-    const userSessionService = inject(UserSessionService);
+    const userSessionService = inject(AuthService);
 
     const authReq = req.clone({
         withCredentials: true
@@ -20,12 +20,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         catchError((error: HttpErrorResponse) => {
             if (error.status === 401) {
                 return userSessionService.refreshToken().pipe(
-                    switchMap(() => {
-                        const retriedAuthReq = authReq.clone({
-                            withCredentials: true
-                        });
-                        return next(retriedAuthReq);
-                    }),
+                    switchMap(() => next(authReq)),
                     catchError(refreshError => {
                         return throwError(() => refreshError);
                     })

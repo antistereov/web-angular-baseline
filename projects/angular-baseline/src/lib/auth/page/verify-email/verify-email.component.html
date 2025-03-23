@@ -1,0 +1,24 @@
+<base-auth-card
+    [loaded]="userLoaded()"
+    [cardTitle]="'Verify Mail'"
+>
+    <p>Please verify your email address.</p>
+
+    <base-button
+        [disabled]="resendLoading || cooldownActive"
+        [label]="'Resend'"
+        (onClick)="resend()"
+    />
+
+    <p *ngIf="cooldownActive">
+        Please wait for {{ cooldownRemaining }} seconds to send another email.
+    </p>
+
+    <p>This wasn't you?</p>
+
+    <base-button
+        [label]="'Restart'"
+        (onClick)="deleteUserAndNavigateToLogin()"
+        severity="secondary"
+    />
+</base-auth-card>

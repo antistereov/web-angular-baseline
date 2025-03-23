@@ -1,0 +1,53 @@
+<base-auth-card
+    [cardTitle]="'auth.pages.login.title' | translate"
+    [loaded]="userLoaded()"
+>
+    <ng-container *ngIf="userLoaded(); else loadingTemplate">
+        <form
+            class="flex flex-col items-center gap-2"
+            [formGroup]="form"
+            (ngSubmit)="login()"
+        >
+            <label for="email" class="w-full">{{ 'auth.fields.email' | translate }}</label>
+            <base-input
+                id="email"
+                formControlName="email"
+                type="email"
+                class="w-full"
+                [invalid]="form.getError('invalid') || invalidAndTouched"
+                [warning]="'auth.warnings.email' | translate"
+                [displayWarning]="invalidAndTouched"
+            />
+            <label for="password" class="w-full">{{ 'auth.fields.password' | translate }}</label>
+            <base-input
+                id="password"
+                formControlName="password"
+                type="password"
+                class="w-full"
+                [invalid]="form.getError('invalid') || invalidAndTouched"
+                [warning]="'auth.warnings.password' | translate"
+                [displayWarning]="invalidAndTouched"
+            />
+            <base-button
+                type="submit"
+                [label]="'auth.pages.login.submit' | translate"
+                [disabled]="loading || form.invalid"
+                [loading]="loading"
+            />
+            <p class="warning-text" *ngIf="form.getError('invalid')">{{ 'auth.pages.login.warning' | translate }}</p>
+        </form>
+    </ng-container>
+
+    <ng-template #loadingTemplate>
+        <div class="flex flex-col items-center gap-2">
+            <base-skeleton class="w-full my-0.5" width="5rem" height="1.5rem"/>
+            <base-skeleton class="w-full" height="2.5rem"/>
+
+            <base-skeleton class="w-full my-0.5" width="5rem" height="1.5rem"/>
+            <base-skeleton class="w-full" height="2.5rem"/>
+
+            <base-skeleton width="5rem" height="2.5rem"/>
+        </div>
+
+    </ng-template>
+</base-auth-card>

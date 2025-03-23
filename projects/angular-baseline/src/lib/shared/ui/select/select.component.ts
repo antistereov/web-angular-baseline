@@ -1,25 +1,55 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Select} from 'primeng/select';
+import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
+import {Select, SelectChangeEvent, SelectModule} from 'primeng/select';
+import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
-  selector: 'base-select',
+    selector: 'base-select',
     imports: [
-        Select
+        Select,
+        SelectModule,
+        FormsModule
     ],
-  templateUrl: './select.component.html',
+    templateUrl: './select.component.html',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => SelectComponent),
+            multi: true
+        }
+    ]
 })
-export class SelectComponent<T> {
-    @Input() options: { label: string, value: T }[] = [];
+export class SelectComponent implements ControlValueAccessor {
+    @Input() options: any[] = [];
     @Input() placeholder: string = '';
     @Input() disabled: boolean = false;
     @Input() class?: string;
+    @Input() optionLabel?: string;
 
-    @Output() valueChange = new EventEmitter<T>();
+    @Output() onChange = new EventEmitter<SelectChangeEvent>();
 
-    selected: T | null = null
+    value: any;
 
-    onSelect(value: T) {
-        this.selected = value;
-        this.valueChange.emit(value);
+    onSelect(event: SelectChangeEvent) {
+        this.value = event.value;
+        this.onChange.emit(event);
+    }
+
+    onChangeFn: (_: any) => void = () => {};
+    onTouchedFn: () => void = () => {};
+
+    writeValue(value: any) {
+        this.value = value;
+    }
+
+    registerOnChange(fn: any) {
+        this.onChangeFn = fn;
+    }
+
+    registerOnTouched(fn: any) {
+        this.onTouchedFn = fn;
+    }
+
+    setDisabledState?(isDisabled: boolean) {
+        this.disabled = isDisabled;
     }
 }

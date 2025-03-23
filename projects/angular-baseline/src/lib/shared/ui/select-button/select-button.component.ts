@@ -7,7 +7,12 @@ import {
     Output,
     TemplateRef
 } from '@angular/core';
-import {SelectButton, SelectButtonChangeEvent, SelectButtonOptionClickEvent} from 'primeng/selectbutton';
+import {
+    SelectButton,
+    SelectButtonChangeEvent,
+    SelectButtonModule,
+    SelectButtonOptionClickEvent
+} from 'primeng/selectbutton';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {NgTemplateOutlet} from '@angular/common';
 
@@ -15,6 +20,7 @@ import {NgTemplateOutlet} from '@angular/common';
     selector: 'base-select-button',
     imports: [
         SelectButton,
+        SelectButtonModule,
         FormsModule,
         NgTemplateOutlet,
     ],

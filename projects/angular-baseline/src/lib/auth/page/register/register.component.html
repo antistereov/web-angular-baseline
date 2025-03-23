@@ -1,0 +1,48 @@
+<base-auth-card
+    [cardTitle]="'auth.pages.register.title' | translate"
+>
+    <form
+        class="flex flex-col items-center gap-2"
+        [formGroup]="form"
+        (ngSubmit)="register()"
+    >
+        <div *ngIf="requireName" class="w-full">
+            <label for="name" class="w-full">{{ 'auth.fields.name' | translate }}</label>
+            <base-input
+                id="name"
+                formControlName="name"
+                class="w-full"
+                [invalid]="form.getError('invalid') || invalidAndTouched"
+                [warning]="'auth.warnings.name' | translate"
+                [displayWarning]="invalidAndTouched"
+            />
+        </div>
+        <label for="email" class="w-full">{{ 'auth.fields.email' | translate }}</label>
+        <base-input
+            id="email"
+            formControlName="email"
+            type="email"
+            class="w-full"
+            [invalid]="form.getError('invalid') || invalidAndTouched"
+            [warning]="'auth.warnings.email' | translate"
+            [displayWarning]="invalidAndTouched"
+        />
+        <label for="password" class="w-full">{{ 'auth.fields.password' | translate }}</label>
+        <base-input
+            id="password"
+            formControlName="password"
+            type="password"
+            class="w-full"
+            [invalid]="form.getError('invalid') || invalidAndTouched"
+            [warning]="'auth.warnings.password' | translate"
+            [displayWarning]="invalidAndTouched"
+        />
+        <base-button
+            type="submit"
+            [label]="'auth.pages.register.submit' | translate"
+            [disabled]="loading || form.invalid"
+            [loading]="loading"
+        />
+        <p class="warning-text" *ngIf="form.getError('invalid')">Wrong credentials.</p>
+    </form>
+</base-auth-card>>
