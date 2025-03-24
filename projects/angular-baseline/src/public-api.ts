@@ -2,7 +2,6 @@
  * Public API Surface of baseline
  */
 
-export * from '@baseline/shared/guards/email-verified.guard';
 export * from '@baseline/core/interceptors/auth.interceptor';
 export * from '@baseline/auth/utils/device.service';
 export * from '@baseline/auth/page/auth.routes';

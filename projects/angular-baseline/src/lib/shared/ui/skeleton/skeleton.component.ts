@@ -6,8 +6,7 @@ import {Skeleton} from 'primeng/skeleton';
     imports: [
         Skeleton
     ],
-  templateUrl: './skeleton.component.html',
-  styleUrl: './skeleton.component.css'
+  templateUrl: './skeleton.component.html'
 })
 export class SkeletonComponent {
     @Input() shape: 'circle' | 'rectangle' = 'rectangle';

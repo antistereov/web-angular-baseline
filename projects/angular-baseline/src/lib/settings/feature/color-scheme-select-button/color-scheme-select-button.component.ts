@@ -13,8 +13,7 @@ import {
         FormsModule,
         SelectButtonComponent,
     ],
-    templateUrl: './color-scheme-select-button.component.html',
-    styleUrl: './color-scheme-select-button.component.css'
+    templateUrl: './color-scheme-select-button.component.html'
 })
 export class ColorSchemeSelectButtonComponent {
     colorSchemes: ColorSchemeOption[] = [
