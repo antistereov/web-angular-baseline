@@ -1,8 +1,8 @@
 import {Component, computed, inject} from '@angular/core';
-import {ColorSchemeService} from '@baseline/settings/utils/color-scheme.service';
+import {ColorSchemeService} from '@baseline/settings/util/color-scheme.service';
 import {FormsModule} from '@angular/forms';
 import {SelectButtonChangeEvent} from 'primeng/selectbutton';
-import {SelectButtonComponent} from '@baseline/shared/ui/select-button/select-button.component';
+import {SelectButtonComponent} from '@baseline/shared/ui/component/select-button/select-button.component';
 import {
     ColorSchemeOption
 } from '@baseline/settings/feature/color-scheme-select-button/color-scheme-select-button.model';

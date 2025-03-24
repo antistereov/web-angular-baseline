@@ -1,14 +1,14 @@
 import {Component, effect, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '@baseline/shared/data-access/user.service';
 import {BASELINE_CONFIG} from '@baseline/core/config/base.config';
 import {catchError, of, tap} from 'rxjs';
 import {MailVerificationService} from '@baseline/auth/data-access/mail-verification.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {AuthCardComponent} from '@baseline/auth/ui/auth-card/auth-card.component';
-import {ButtonComponent} from '@baseline/shared/ui/button/button.component';
+import {ButtonComponent} from '@baseline/shared/ui/component/button/button.component';
 import {NgIf} from '@angular/common';
 import {toSignal} from '@angular/core/rxjs-interop';
+import {UserService} from '@baseline/shared/data-access/user.service';
 
 @Component({
   selector: 'base-verify-email',
@@ -24,7 +24,9 @@ export class VerifyEmailComponent implements OnInit {
     private router = inject(Router);
     private userService = inject(UserService);
     private mailVerificationService = inject(MailVerificationService);
+
     private baselineConfig = inject(BASELINE_CONFIG);
+    private redirectUrl = this.baselineConfig.auth.redirect.verifyMail
 
     user = this.userService.user;
     userLoaded = this.userService.userLoaded;
@@ -36,33 +38,32 @@ export class VerifyEmailComponent implements OnInit {
     constructor() {
         effect(() => {
             if (this.user()?.emailVerified) {
-                this.router.navigate([this.baselineConfig.auth.redirect.verifyMail]).then()
+                this.router.navigate([this.redirectUrl]).then()
             }
         })
-
     }
 
     ngOnInit() {
         this.verifyEmail();
     }
 
-    get verifyEmail() {
-        return toSignal(this.route.queryParams.pipe(
+    verifyEmail() {
+        return this.route.queryParams.pipe(
             tap(params => {
                 const token = params['token'];
 
                 if (token) {
-                    toSignal(this.mailVerificationService.verifyEmail(token).pipe(
+                    this.mailVerificationService.verifyEmail(token).pipe(
                         tap(() => this.router.navigate(['/']).then())
-                    ));
+                    ).subscribe();
                 }
             })
-        ));
+        ).subscribe();
     }
 
     resend() {
         this.resendLoading = true;
-        toSignal(this.mailVerificationService.resendVerificationEmail().pipe(
+        this.mailVerificationService.resendVerificationEmail().pipe(
             tap(() => {
                 this.resendLoading = false;
                 this.remainingCooldown();
@@ -73,7 +74,7 @@ export class VerifyEmailComponent implements OnInit {
                 }
                 return of();
             })
-        ));
+        ).subscribe();
     }
 
     private get remainingCooldown() {
@@ -100,7 +101,8 @@ export class VerifyEmailComponent implements OnInit {
     }
 
     deleteUserAndNavigateToLogin() {
-
+        this.userService.delete().subscribe();
+        this.router.navigate([this.redirectUrl]).then();
     }
 
 }

@@ -1,0 +1,36 @@
+<p-drawer
+    class="base-drawer"
+    [styleClass]="class"
+    [visible]="visible"
+    [position]="position"
+    [closable]="closable"
+    [header]="title"
+
+    (onShow)="onShow.emit($event)"
+    (onHide)="onHide.emit($event)"
+    (visibleChange)="toggleChange($event)"
+>
+    <ng-template #header>
+        <ng-container *ngTemplateOutlet="headerTemplate!" >
+        </ng-container>
+        <ng-content></ng-content>
+    </ng-template>
+
+    <ng-template #content>
+        <ng-container *ngTemplateOutlet="contentTemplate">
+        </ng-container>
+        <ng-content></ng-content>
+    </ng-template>
+
+    <ng-template #footer>
+        <ng-container *ngTemplateOutlet="footerTemplate">
+        </ng-container>
+    </ng-template>
+
+    <div  *ngIf="headlessTemplate">
+        <ng-template #headless>
+            <ng-container *ngTemplateOutlet="headlessTemplate">
+            </ng-container>
+        </ng-template>
+    </div>
+</p-drawer>

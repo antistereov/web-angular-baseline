@@ -2,32 +2,37 @@
     [cardTitle]="'auth.pages.login.title' | translate"
     [loaded]="userLoaded()"
 >
-    <ng-container *ngIf="userLoaded(); else loadingTemplate">
+    <ng-container *ngIf="userLoaded() && !loggedIn(); else loadingTemplate">
         <form
             class="flex flex-col items-center gap-2"
             [formGroup]="form"
             (ngSubmit)="login()"
         >
-            <label for="email" class="w-full">{{ 'auth.fields.email' | translate }}</label>
-            <base-input
-                id="email"
-                formControlName="email"
-                type="email"
-                class="w-full"
-                [invalid]="form.getError('invalid') || invalidAndTouched"
-                [warning]="'auth.warnings.email' | translate"
-                [displayWarning]="invalidAndTouched"
-            />
-            <label for="password" class="w-full">{{ 'auth.fields.password' | translate }}</label>
-            <base-input
-                id="password"
-                formControlName="password"
-                type="password"
-                class="w-full"
-                [invalid]="form.getError('invalid') || invalidAndTouched"
-                [warning]="'auth.warnings.password' | translate"
-                [displayWarning]="invalidAndTouched"
-            />
+            <div class="w-full">
+                <label for="email" class="w-full">{{ 'auth.fields.email' | translate }}</label>
+                <base-input
+                    id="email"
+                    formControlName="email"
+                    type="email"
+                    class="w-full"
+                    [invalid]="form.getError('invalid') || invalidAndTouched"
+                    [warning]="'auth.warnings.email' | translate"
+                    [displayWarning]="invalidAndTouched"
+                />
+            </div>
+            <div class="w-full">
+                <label for="password" class="w-full">{{ 'auth.fields.password' | translate }}</label>
+                <base-input
+                    id="password"
+                    formControlName="password"
+                    type="password"
+                    class="w-full"
+                    [invalid]="form.getError('invalid') || invalidAndTouched"
+                    [warning]="'auth.warnings.password' | translate"
+                    [displayWarning]="invalidAndTouched"
+                />
+            </div>
+
             <base-button
                 type="submit"
                 [label]="'auth.pages.login.submit' | translate"
@@ -38,13 +43,16 @@
         </form>
     </ng-container>
 
-    <ng-template #loadingTemplate>
-        <div class="flex flex-col items-center gap-2">
-            <base-skeleton class="w-full my-0.5" width="5rem" height="1.5rem"/>
-            <base-skeleton class="w-full" height="2.5rem"/>
-
-            <base-skeleton class="w-full my-0.5" width="5rem" height="1.5rem"/>
-            <base-skeleton class="w-full" height="2.5rem"/>
+    <ng-template #loadingTemplate class="w-full">
+        <div class="flex flex-col items-center gap-2 w-full">
+            <div class="w-full">
+                <base-skeleton class="w-full my-0.5" width="5rem" height="1.5rem"/>
+                <base-skeleton class="w-full" height="2.5rem"/>
+            </div>
+            <div class="w-full">
+                <base-skeleton class="w-full my-0.5" width="5rem" height="1.5rem"/>
+                <base-skeleton class="w-full" height="2.5rem"/>
+            </div>
 
             <base-skeleton width="5rem" height="2.5rem"/>
         </div>

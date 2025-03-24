@@ -3,8 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import {BASELINE_CONFIG} from '@baseline/core/config/base.config';
 import {map, Observable, tap} from 'rxjs';
 import {User} from '@baseline/shared/models/user.model';
-import {UserService} from '@baseline/shared/data-access/user.service';
 import {MailVerificationCooldownResponse} from '@baseline/auth/model/email-verification.model';
+import {UserService} from '@baseline/shared/data-access/user.service';
 
 @Injectable({
     providedIn: 'root'

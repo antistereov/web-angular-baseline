@@ -1,11 +1,11 @@
 import {Component, inject} from '@angular/core';
 import {FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
-import {AuthService} from '@baseline/auth/data-access/auth.service';
+import {UserService} from '@baseline/shared/data-access/user.service';
 import {Router} from '@angular/router';
 import {BASELINE_CONFIG} from '@baseline/core/config/base.config';
 import {catchError, of, switchMap} from 'rxjs';
-import {ButtonComponent} from '@baseline/shared/ui/button/button.component';
-import {InputComponent} from '@baseline/shared/ui/input/input.component';
+import {ButtonComponent} from '@baseline/shared/ui/component/button/button.component';
+import {InputComponent} from '@baseline/shared/ui/component/input/input.component';
 import {NgIf} from '@angular/common';
 import {AuthCardComponent} from '@baseline/auth/ui/auth-card/auth-card.component';
 import {TranslatePipe} from '@ngx-translate/core';
@@ -24,7 +24,7 @@ import {TranslatePipe} from '@ngx-translate/core';
 })
 export class RegisterComponent {
     private fb = inject(NonNullableFormBuilder);
-    private userSessionService = inject(AuthService);
+    private userService = inject(UserService);
     private router = inject(Router);
     private appConfig = inject(BASELINE_CONFIG);
 
@@ -38,8 +38,6 @@ export class RegisterComponent {
             password: this.fb.control('', [Validators.required]),
             name: this.fb.control('', this.requireName ? [Validators.required] : [])
         });
-
-        console.log('Register loaded');
     }
 
     get email() {
@@ -70,7 +68,7 @@ export class RegisterComponent {
         }
 
         this.loading = true;
-        this.userSessionService.register(this.form.value)
+        this.userService.register(this.form.value)
             .pipe(
                 switchMap(() => {
                     this.router.navigate([this.appConfig.auth.redirect.register]).then();

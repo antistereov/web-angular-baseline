@@ -2,6 +2,7 @@
     [options]="languages"
     [optionLabel]="'name'"
     [ngModel]="selectedLanguage"
-    (onChange)="setLanguage($event.value.code)"
+    (onChange)="setLanguage($event.value)"
+    [ngClass]="class"
 >
 </base-select>

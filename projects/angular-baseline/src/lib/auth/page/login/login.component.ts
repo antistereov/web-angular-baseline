@@ -1,15 +1,14 @@
 import {Component, effect, inject} from '@angular/core';
 import {FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
-import {AuthService} from '@baseline/auth/data-access/auth.service';
+import {UserService} from '@baseline/shared/data-access/user.service';
 import {Router} from '@angular/router';
 import {catchError, of, switchMap} from 'rxjs';
-import {InputComponent} from '@baseline/shared/ui/input/input.component';
-import {ButtonComponent} from '@baseline/shared/ui/button/button.component';
+import {InputComponent} from '@baseline/shared/ui/component/input/input.component';
+import {ButtonComponent} from '@baseline/shared/ui/component/button/button.component';
 import {NgIf} from '@angular/common';
 import {AuthCardComponent} from '@baseline/auth/ui/auth-card/auth-card.component';
 import {BASELINE_CONFIG} from '@baseline/core/config/base.config';
-import {SkeletonComponent} from '@baseline/shared/ui/skeleton/skeleton.component';
-import {UserService} from '@baseline/shared/data-access/user.service';
+import {SkeletonComponent} from '@baseline/shared/ui/component/skeleton/skeleton.component';
 import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
@@ -27,20 +26,20 @@ import {TranslatePipe} from '@ngx-translate/core';
 })
 export class LoginComponent {
     private fb = inject(NonNullableFormBuilder);
-    private authService = inject(AuthService);
     private userService = inject(UserService);
     private router = inject(Router);
     private appConfig = inject(BASELINE_CONFIG);
 
     userLoaded = this.userService.userLoaded;
     user = this.userService.user;
+    loggedIn = this.userService.loggedIn;
 
     form: FormGroup;
     loading: boolean = false;
 
     constructor() {
         effect(() => {
-            if (this.user()) {
+            if (this.loggedIn()) {
                 this.router.navigate([this.appConfig.auth.redirect.login]).then();
             }
         })
@@ -69,7 +68,7 @@ export class LoginComponent {
         }
 
         this.loading = true;
-        this.authService.login(this.form.value)
+        this.userService.login(this.form.value)
             .pipe(
                 switchMap(() => {
                     this.router.navigate([this.appConfig.auth.redirect.login]).then();

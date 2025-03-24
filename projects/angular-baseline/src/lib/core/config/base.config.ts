@@ -1,8 +1,22 @@
-import {inject, InjectionToken, Provider} from '@angular/core';
+import {
+    inject,
+    InjectionToken,
+    provideZoneChangeDetection
+} from '@angular/core';
 import config from 'base.config.json'
-import {AuthService} from '@baseline/auth/data-access/auth.service';
-import {ColorSchemeService} from '@baseline/settings/utils/color-scheme.service';
-import {LanguageService} from '@baseline/settings/utils/language.service';
+import {UserService} from '@baseline/shared/data-access/user.service';
+import {ColorSchemeService} from '@baseline/settings/util/color-scheme.service';
+import {LanguageService} from '@baseline/settings/util/language.service';
+import {provideRouter} from '@angular/router';
+import {routes} from '../../../../../test-app/src/app/app.routes';
+import {provideHttpClient, withFetch, withInterceptors} from '@angular/common/http';
+import {authInterceptor} from '@baseline/core/interceptors/auth.interceptor';
+import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
+import {providePrimeNG} from 'primeng/config';
+import {primeConfig} from '@baseline/core/theme/prime.config';
+import {provideErrorHandler} from '@baseline/core/error/error.provider';
+import {ConfirmationService, MessageService} from 'primeng/api';
+import {provideTranslateService} from '@baseline/core/translate/translate-provider';
 
 export interface BaselineConfig {
     apiBaseUrl: string;
@@ -64,16 +78,30 @@ export const BASELINE_CONFIG = new InjectionToken<BaselineConfig>('BASELINE_CONF
     factory: () => mergedConfig
 })
 
-export function provideBaselineConfig(): Provider {
-    return {
-        provide: BASELINE_CONFIG,
-        useValue: mergedConfig
-    };
+export function provideBaseline() {
+    return [
+        {
+            provide: BASELINE_CONFIG,
+            useValue: mergedConfig
+        },
+        provideZoneChangeDetection({ eventCoalescing: true }),
+        provideRouter(routes),
+        provideHttpClient(
+            withFetch(),
+            withInterceptors([authInterceptor])
+        ),
+        provideAnimationsAsync(),
+        providePrimeNG(primeConfig),
+        provideErrorHandler(),
+        provideTranslateService(),
+        MessageService,
+        ConfirmationService,
+    ];
 }
 
 export function initializeBaseline() {
-    const authService = inject(AuthService);
+    inject(UserService);
     inject(ColorSchemeService);
+    inject(MessageService);
     inject(LanguageService);
-    authService.initializeUser().subscribe();
 }

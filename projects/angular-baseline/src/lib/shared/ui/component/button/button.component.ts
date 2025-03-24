@@ -17,8 +17,8 @@ export class ButtonComponent {
     @Input({transform: booleanAttribute}) loading: boolean = false;
     @Input() loadingIcon?: string;
     @Input() raised: boolean = false;
-    @Input() rounded: boolean = false;
-    @Input() text: boolean = false;
+    @Input({transform: booleanAttribute}) rounded: boolean = false;
+    @Input({transform: booleanAttribute}) text: boolean = false;
     @Input() severity?: 'info' | 'success' | 'warn' | 'danger' | 'secondary' | 'contrast' | 'help' | 'primary';
     @Input() outlined: boolean = false;
     @Input() link: boolean = false;

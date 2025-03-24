@@ -8,7 +8,7 @@ export const routes: Routes = [
     },
     {
         path: '',
-        loadComponent: () => import ('@baseline/demo/pages/demo.component').then(c => c.DemoComponent)
+        loadComponent: () => import ('./demo/page/demo.component').then(c => c.DemoComponent)
     },
     {
         path: '**',

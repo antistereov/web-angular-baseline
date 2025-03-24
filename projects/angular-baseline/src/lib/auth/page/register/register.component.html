@@ -17,26 +17,31 @@
                 [displayWarning]="invalidAndTouched"
             />
         </div>
-        <label for="email" class="w-full">{{ 'auth.fields.email' | translate }}</label>
-        <base-input
-            id="email"
-            formControlName="email"
-            type="email"
-            class="w-full"
-            [invalid]="form.getError('invalid') || invalidAndTouched"
-            [warning]="'auth.warnings.email' | translate"
-            [displayWarning]="invalidAndTouched"
-        />
-        <label for="password" class="w-full">{{ 'auth.fields.password' | translate }}</label>
-        <base-input
-            id="password"
-            formControlName="password"
-            type="password"
-            class="w-full"
-            [invalid]="form.getError('invalid') || invalidAndTouched"
-            [warning]="'auth.warnings.password' | translate"
-            [displayWarning]="invalidAndTouched"
-        />
+        <div class="w-full">
+            <label for="email" class="w-full">{{ 'auth.fields.email' | translate }}</label>
+            <base-input
+                id="email"
+                formControlName="email"
+                type="email"
+                class="w-full"
+                [invalid]="form.getError('invalid') || invalidAndTouched"
+                [warning]="'auth.warnings.email' | translate"
+                [displayWarning]="invalidAndTouched"
+            />
+        </div>
+        <div class="w-full">
+            <label for="password" class="w-full">{{ 'auth.fields.password' | translate }}</label>
+            <base-input
+                id="password"
+                formControlName="password"
+                type="password"
+                class="w-full"
+                [invalid]="form.getError('invalid') || invalidAndTouched"
+                [warning]="'auth.warnings.password' | translate"
+                [displayWarning]="invalidAndTouched"
+            />
+        </div>
+
         <base-button
             type="submit"
             [label]="'auth.pages.register.submit' | translate"
