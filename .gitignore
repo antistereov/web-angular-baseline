@@ -42,3 +42,4 @@ testem.log
 Thumbs.db
 /web-ui-angular.iml
 /.run/
+/web-angular-baseline.iml
