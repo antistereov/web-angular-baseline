@@ -6,9 +6,9 @@
     [closable]="closable"
     [header]="title"
 
-    (onShow)="onShow.emit($event)"
-    (onHide)="onHide.emit($event)"
-    (visibleChange)="toggleChange($event)"
+    (onShow)="show($event)"
+    (onHide)="hide($event)"
+    (visibleChange)="visibleChange.emit($event)"
 >
     <ng-template #header>
         <ng-container *ngTemplateOutlet="headerTemplate!" >

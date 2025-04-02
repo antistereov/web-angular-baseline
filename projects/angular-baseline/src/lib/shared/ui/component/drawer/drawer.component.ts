@@ -38,9 +38,4 @@ export class DrawerComponent {
         this.visibleChange.emit(true);
         this.onShow.emit(event);
     }
-
-    toggleChange(event: boolean) {
-        this.visibleChange.emit(event);
-        this.visible = event;
-    }
 }
