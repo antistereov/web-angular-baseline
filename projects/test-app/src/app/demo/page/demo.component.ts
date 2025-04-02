@@ -25,8 +25,8 @@ import {TooltipDirective} from '@baseline/shared/ui/directive/tooltip.directive'
         LanguageSelectComponent,
         TranslatePipe,
         DrawerComponent,
-        NgIf,
         TooltipDirective,
+        NgIf,
     ],
   templateUrl: './demo.component.html'
 })
