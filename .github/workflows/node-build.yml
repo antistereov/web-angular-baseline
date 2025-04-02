@@ -40,7 +40,3 @@ jobs:
       - name: Build Test App with Yarn
         run: |
           yarn build test-app --configuration production
-
-      - name: Build External Test App with Yarn
-        run: |
-          yarn build test-app-ext --configuration production
