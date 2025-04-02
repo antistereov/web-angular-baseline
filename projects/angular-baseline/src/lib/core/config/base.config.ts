@@ -8,7 +8,6 @@ import {UserService} from '@baseline/shared/data-access/user.service';
 import {ColorSchemeService} from '@baseline/settings/util/color-scheme.service';
 import {LanguageService} from '@baseline/settings/util/language.service';
 import {provideRouter} from '@angular/router';
-import {routes} from '../../../../../test-app/src/app/app.routes';
 import {provideHttpClient, withFetch, withInterceptors} from '@angular/common/http';
 import {authInterceptor} from '@baseline/core/interceptors/auth.interceptor';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
@@ -17,6 +16,7 @@ import {primeConfig} from '@baseline/core/theme/prime.config';
 import {provideErrorHandler} from '@baseline/core/error/error.provider';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {provideTranslateService} from '@baseline/core/translate/translate-provider';
+import {authRoutes} from '@baseline/auth/page/auth.routes';
 
 export interface BaselineConfig {
     apiBaseUrl: string;
@@ -85,7 +85,7 @@ export function provideBaseline() {
             useValue: mergedConfig
         },
         provideZoneChangeDetection({ eventCoalescing: true }),
-        provideRouter(routes),
+        provideRouter(authRoutes),
         provideHttpClient(
             withFetch(),
             withInterceptors([authInterceptor])
