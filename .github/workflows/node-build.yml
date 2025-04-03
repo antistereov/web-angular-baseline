@@ -43,7 +43,7 @@ jobs:
 
       - name: Testing with jest
         run: |
-          jest
+          npx jest
 
       - name: Testing with ng test
         run: |
