@@ -1,8 +1,4 @@
-import {
-    inject,
-    InjectionToken,
-    provideZoneChangeDetection
-} from '@angular/core';
+import {inject, InjectionToken, provideZoneChangeDetection} from '@angular/core';
 import config from 'base.config.json'
 import {UserService} from '@baseline/shared/data-access/user.service';
 import {ColorSchemeService} from '@baseline/settings/util/color-scheme.service';

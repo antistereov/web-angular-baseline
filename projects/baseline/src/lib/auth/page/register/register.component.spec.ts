@@ -1,6 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RegisterComponent } from './register.component';
+import {RegisterComponent} from './register.component';
+import {provideHttpClient} from "@angular/common/http";
+import {TranslateFakeLoader, TranslateLoader, TranslateModule} from "@ngx-translate/core";
 
 describe('RegisterComponent', () => {
     let component: RegisterComponent;
@@ -8,7 +10,13 @@ describe('RegisterComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [RegisterComponent]
+            imports: [
+                RegisterComponent,
+                TranslateModule.forRoot({
+                    loader: { provide: TranslateLoader, useClass: TranslateFakeLoader }
+                })
+            ],
+            providers: [provideHttpClient()]
         })
             .compileComponents();
 

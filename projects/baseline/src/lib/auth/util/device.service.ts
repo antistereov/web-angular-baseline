@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import platform from 'platform';
 import {DeviceInfoRequest} from '@baseline/auth/model/user-session.model';
 

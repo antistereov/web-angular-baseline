@@ -1,4 +1,4 @@
-import type { Config } from 'jest';
+import type {Config} from 'jest';
 
 const config: Config = {
     preset: 'jest-preset-angular',
@@ -15,6 +15,7 @@ const config: Config = {
     moduleNameMapper: {
         '^@baseline/(.*)$': '<rootDir>/projects/baseline/src/lib/$1',
         'base.config.json': '<rootDir>/base.config.json',
+        "^@primeng/(.*)$": "<rootDir>/node_modules/@primeng/$1"
     },
     testEnvironment: 'jsdom',
 };

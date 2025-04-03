@@ -1,6 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 
-import { ColorSchemeService } from './color-scheme.service';
+import {ColorSchemeService} from './color-scheme.service';
 
 describe('ColorSchemeService', () => {
   beforeEach(() => {

@@ -1,6 +1,8 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { DemoComponent } from './demo.component';
+import {DemoComponent} from './demo.component';
+import {provideHttpClient} from "@angular/common/http";
+import {TranslateFakeLoader, TranslateLoader, TranslateModule} from "@ngx-translate/core";
 
 describe('DemoComponent', () => {
     let component: DemoComponent;
@@ -8,7 +10,13 @@ describe('DemoComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [DemoComponent]
+            imports: [
+                DemoComponent,
+                TranslateModule.forRoot({ // Properly configure ngx-translate
+                    loader: { provide: TranslateLoader, useClass: TranslateFakeLoader }
+                })
+            ],
+            providers: [provideHttpClient()]
         })
             .compileComponents();
     }));

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ColorSchemeSelectButtonComponent } from './color-scheme-select-button.component';
+import {ColorSchemeSelectButtonComponent} from './color-scheme-select-button.component';
 
 describe('ColorSchemeSelectButtonComponent', () => {
     let component: ColorSchemeSelectButtonComponent;

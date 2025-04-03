@@ -1,12 +1,15 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { MailVerificationService } from './mail-verification.service';
+import {MailVerificationService} from './mail-verification.service';
+import {provideHttpClient} from "@angular/common/http";
 
 describe('MailVerificationService', () => {
     let service: MailVerificationService;
 
     beforeEach(() => {
-        TestBed.configureTestingModule({});
+        TestBed.configureTestingModule({
+            providers: [provideHttpClient()],
+        });
         service = TestBed.inject(MailVerificationService);
     });
 

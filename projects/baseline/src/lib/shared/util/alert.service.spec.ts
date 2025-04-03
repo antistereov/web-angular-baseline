@@ -1,6 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 
-import { AlertService } from './alert.service';
+import {AlertService} from './alert.service';
 import {MessageService} from "primeng/api";
 
 describe('AlertService', () => {

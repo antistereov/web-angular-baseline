@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 import {authRoutes} from '@baseline/auth/page/auth.routes';
 
 export const routes: Routes = [

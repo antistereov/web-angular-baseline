@@ -1,11 +1,4 @@
-import {
-    Directive,
-    ElementRef,
-    inject,
-    Input, OnChanges,
-    Renderer2,
-    TemplateRef
-} from '@angular/core';
+import {Directive, ElementRef, inject, Input, OnChanges, Renderer2, TemplateRef} from '@angular/core';
 import {Tooltip, TooltipModule, TooltipStyle} from 'primeng/tooltip';
 
 @Directive({

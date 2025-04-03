@@ -1,12 +1,4 @@
-import {
-    Component,
-    ContentChild,
-    EventEmitter,
-    forwardRef,
-    Input,
-    Output,
-    TemplateRef
-} from '@angular/core';
+import {Component, ContentChild, EventEmitter, forwardRef, Input, Output, TemplateRef} from '@angular/core';
 import {
     SelectButton,
     SelectButtonChangeEvent,
