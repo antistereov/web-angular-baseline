@@ -35,8 +35,16 @@ jobs:
 
       - name: Build Package
         run: |
-          ng build angular-baseline
+          ng build baseline
 
-      - name: Build Test App with Yarn
+      - name: Build Demo App with Yarn
         run: |
-          yarn build test-app --configuration production
+          ng build demo --configuration production
+
+      - name: Testing with jest
+        run: |
+          jest
+
+      - name: Testing with ng test
+        run: |
+          ng test
