@@ -41,10 +41,9 @@ jobs:
         run: |
           ng build demo --configuration production
 
-      - name: Testing with jest
-        run: |
-          npx jest
-
-      - name: Testing with ng test
-        run: |
-          ng test
+      - name: Testing
+        uses: willcaul/jest-github-action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          test-command: "npx jest"
