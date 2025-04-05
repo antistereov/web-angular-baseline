@@ -1,8 +1,8 @@
 export interface User {
     id: string;
-    name: string | undefined;
+    name?: string;
     email: string;
-    roles: "USER" | "GUEST" | "ADMIN"
+    roles: ("USER" | "GUEST" | "ADMIN")[];
     emailVerified: boolean;
     devices: DeviceInfo[];
     lastActive: Date;
@@ -14,10 +14,10 @@ export interface ApplicationInfo {}
 
 export interface DeviceInfo {
     id: string;
-    browser: string | undefined;
-    os: string | undefined;
-    ipAddress: string | undefined;
-    location: LocationInfo | undefined;
+    browser?: string;
+    os?: string;
+    ipAddress?: string;
+    location?: LocationInfo;
     lastActive: Date;
 }
 
