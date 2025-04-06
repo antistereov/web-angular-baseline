@@ -28,18 +28,17 @@ describe('UserService', () => {
         httpTestingController.verify();
     })
 
-    it('should be created', inject([UserService], (service: UserService) => {
+    it('should be initialized correctly', inject([UserService], (service: UserService) => {
         expect(service).toBeTruthy();
 
+        expect(service.user()).toBeFalsy();
+        expect(service.userLoaded()).toEqual(false);
+
         const req = httpTestingController.expectOne(`http://localhost:8000/user/me`);
         expect(req.request.method).toBe('GET');
         req.flush(mockUser);
+
+        expect(service.user()).toEqual(mockUser);
+        expect(service.userLoaded()).toEqual(true);
     }));
-
-    it('should initialize user correctly', () => {
-
-        const req = httpTestingController.expectOne(`http://localhost:8000/user/me`);
-        expect(req.request.method).toBe('GET');
-        req.flush(mockUser);
-    })
 });
