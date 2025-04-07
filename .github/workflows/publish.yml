@@ -1,0 +1,47 @@
+name: Node Build
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  node_build:
+    name: Build with Node.js
+    runs-on: ubuntu-latest
+
+    steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
+
+        - name: Set up Node.js
+          uses: actions/setup-node@v3
+          with:
+              node-version: lts/*
+
+        - name: Install Yarn and Angular CLI
+          run: |
+              npm install -g yarn @angular/cli
+
+        - name: Install dependencies
+          run: |
+              yarn install
+
+        - name: Build Package
+          run: |
+              ng build baseline
+
+        - name: Build Demo App with Yarn
+          run: |
+              ng build demo --configuration production
+
+        - name: Testing with Jest
+          run: |
+              yarn test
+
+        - name: Publish
+          working-directory: dist/baseline
+          run: |
+            npm publish --provenance --access public
+          env:
+            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
