@@ -40,4 +40,4 @@ jobs:
 
       - name: Testing with Jest
         run: |
-          npm test
+          yarn test
