@@ -4,6 +4,7 @@
         "access": "public"
     },
     "version": "0.0.0",
+    "license": "GPL-3.0-or-later",
     "peerDependencies": {
         "@angular/animations": "^19.2.0",
         "@angular/common": "^19.2.0",
