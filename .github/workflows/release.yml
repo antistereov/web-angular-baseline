@@ -50,6 +50,10 @@ jobs:
       run: |
         zip -r package.zip ./projects/baseline
 
+    - name: Copy README.md to package
+      run: |
+        cp ./README.md ./projects/baseline/README.md
+
     - name: Release
       working-directory: projects/baseline
       env:
