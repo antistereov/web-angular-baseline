@@ -31,7 +31,7 @@
         [
             "@semantic-release/github",
             {
-                "assets": ["../../dist/baseline/**"]
+                "assets": ["../../package.zip"]
             }
         ],
         [
