@@ -1,4 +1,4 @@
-import {computed, inject, Injectable, Signal, signal} from '@angular/core';
+import {computed, effect, inject, Injectable, Signal, signal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {catchError, map, Observable, of, take, tap, throwError} from 'rxjs';
 import {BASELINE_CONFIG} from '@baseline/core/config/base.config';
@@ -27,6 +27,8 @@ export class UserService {
     private _userLoaded = signal<boolean>(false);
 
     loggedIn = computed(() => this._user() !== undefined);
+    twoFactorAuthNeeded = signal<boolean>(false);
+
 
     get user(): Signal<User | undefined> {
         return this._user;
@@ -38,6 +40,12 @@ export class UserService {
 
     constructor() {
         this.initializeUser();
+
+        effect(() => {
+            if (this.twoFactorAuthNeeded()) {
+                this.router.navigate(['/auth/two-factor']).then()
+            }
+        });
     }
 
     setUser(user: User | undefined) {
@@ -79,9 +87,7 @@ export class UserService {
     }
 
     private handleLoginResponse(res: LoginResponse): User {
-        if (res.twoFactorRequired) {
-            this.router.navigate(['auth/2fa']).then();
-        }
+        this.twoFactorAuthNeeded.set(res.twoFactorRequired)
 
         return res.user;
     }
