@@ -3,12 +3,14 @@
         "fields": {
             "email": "Email",
             "password": "Password",
-            "name": "Name"
+            "name": "Name",
+            "2fa": "Code"
         },
         "warnings": {
             "email": "Please enter a valid email.",
             "password": "Please enter a password.",
-            "name": "Please enter your name."
+            "name": "Please enter your name.",
+            "2fa": "Please enter a valid 2fa code"
         },
         "pages": {
             "login": {
@@ -19,6 +21,10 @@
             "register": {
                 "title": "Register",
                 "submit": "Register"
+            },
+            "2fa": {
+                "title": "Two Factor Authentication",
+                "submit": "Submit"
             }
         }
     }
