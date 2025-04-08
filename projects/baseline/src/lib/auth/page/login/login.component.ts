@@ -72,6 +72,7 @@ export class LoginComponent {
             .pipe(
                 switchMap(() => {
                     this.router.navigate([this.appConfig.auth.redirect.login]).then();
+                    this.loading = false;
                     return of(true);
                 }),
                 catchError(() => {
