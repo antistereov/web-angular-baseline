@@ -5,7 +5,6 @@ import {UserService} from "@baseline/shared/data-access/user.service";
 import {Observable, tap} from "rxjs";
 import {TwoFactorSetupResponse, TwoFactorStatusResponse} from "@baseline/auth/model/two-factor.model";
 import {User} from "@baseline/shared/models/user.model";
-import {StepUpStatusResponse} from "@baseline/auth/model/user-session.model";
 
 @Injectable({
   providedIn: 'root'
