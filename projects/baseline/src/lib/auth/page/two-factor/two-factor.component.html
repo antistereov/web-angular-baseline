@@ -1,1 +1,18 @@
-<p>two-factor works!</p>
+<base-auth-card
+    [cardTitle]="'auth.pages.2fa.title' | translate"
+>
+    <div class="w-full flex flex-col items-center gap-2">
+        <base-input-otp
+            [(ngModel)]="code"
+            (onChange)="onChange($event)"
+        />
+
+        <base-button
+            type="submit"
+            [label]="'auth.pages.2fa.submit' | translate"
+            [disabled]="loading || !this.isValid"
+            [loading]="loading"
+            (onClick)="submit()"
+        />
+    </div>
+</base-auth-card>
