@@ -27,3 +27,8 @@ export interface RegisterInformation extends LoginCredentials {
 export interface RegisterUserRequest extends RegisterInformation {
     device: DeviceInfoRequest;
 }
+
+export interface StepUpStatusResponse {
+    userId: string;
+    deviceId: string;
+}
