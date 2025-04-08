@@ -56,5 +56,4 @@ export class InputComponent implements ControlValueAccessor {
         this.value = input.value;
         this.onChange(input.value);
     }
-
 }
