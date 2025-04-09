@@ -1,0 +1,12 @@
+<p-check-box
+    [(ngModel)]="value"
+    [styleClass]="class"
+    [disabled]="disabled"
+    [trueValue]="trueValue"
+    [falseValue]="falseValue"
+    [inputId]="inputId"
+
+    (onChange)="onChange.emit($event)"
+    (onFocus)="onFocus.emit($event)"
+    (onBlur)="onBlur.emit($event)"
+/>
