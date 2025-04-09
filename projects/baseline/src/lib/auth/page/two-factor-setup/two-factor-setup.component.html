@@ -1,0 +1,9 @@
+<base-auth-card
+    [cardTitle]="'auth.pages.2fa.setup.title' | translate"
+    [loaded]="userLoaded() && setupLoaded"
+>
+
+    <p *ngIf="twoFactorInfo()">{{ twoFactorInfo()!!.optAuthUrl}}</p>
+
+    <p *ngIf="twoFactorInfo()">{{ twoFactorInfo()!!.recoveryCode}}</p>
+</base-auth-card>

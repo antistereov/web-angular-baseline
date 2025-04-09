@@ -4,13 +4,15 @@ import {
     FormsModule,
     ReactiveFormsModule,
 } from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {TwoFactorService} from "@baseline/auth/data-access/two-factor.service";
 import {catchError, tap, throwError} from "rxjs";
 import {AuthCardComponent} from "@baseline/auth/ui/auth-card/auth-card.component";
 import {TranslatePipe} from "@ngx-translate/core";
 import {ButtonComponent} from "@baseline/shared/ui/component/button/button.component";
 import {InputOtpComponent} from "@baseline/shared/ui/component/input-otp/input-otp.component";
+import {UserService} from "@baseline/shared/data-access/user.service";
+import {DividerComponent} from "@baseline/shared/ui/component/divider/divider.component";
 
 @Component({
     selector: 'base-two-factor',
@@ -20,11 +22,13 @@ import {InputOtpComponent} from "@baseline/shared/ui/component/input-otp/input-o
         ReactiveFormsModule,
         ButtonComponent,
         InputOtpComponent,
-        FormsModule
+        FormsModule,
+        RouterLink,
+        DividerComponent
     ],
-    templateUrl: './two-factor.component.html',
+    templateUrl: './two-factor-verify.component.html',
 })
-export class TwoFactorComponent implements OnInit {
+export class TwoFactorVerifyComponent implements OnInit {
     context: 'login' | 'step-up' = 'login';
     redirectTo: string = '/';
     code: string = '';
@@ -34,6 +38,9 @@ export class TwoFactorComponent implements OnInit {
     private route = inject(ActivatedRoute);
     private router = inject(Router)
     private twoFactorService = inject(TwoFactorService);
+    private userService = inject(UserService);
+
+    userLoaded = this.userService.userLoaded;
 
     constructor() {
         this.redirectTo = this.route.snapshot.queryParamMap.get('redirect') || '/';

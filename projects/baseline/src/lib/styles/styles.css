@@ -22,6 +22,10 @@ app-root {
     height: 100vh;
 }
 
+a {
+    text-decoration: underline;
+}
+
 main {
     flex: 1;
 }

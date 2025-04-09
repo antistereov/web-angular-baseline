@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TwoFactorComponent } from './two-factor.component';
+import { TwoFactorVerifyComponent } from './two-factor-verify.component';
 import {ActivatedRoute, convertToParamMap} from "@angular/router";
 import {provideHttpClient} from "@angular/common/http";
 import {TranslateFakeLoader, TranslateLoader, TranslateModule} from "@ngx-translate/core";
 
 describe('TwoFactorComponent', () => {
-    let component: TwoFactorComponent;
-    let fixture: ComponentFixture<TwoFactorComponent>;
+    let component: TwoFactorVerifyComponent;
+    let fixture: ComponentFixture<TwoFactorVerifyComponent>;
 
     beforeEach(async () => {
         const mockActivatedRoute = {
@@ -19,7 +19,7 @@ describe('TwoFactorComponent', () => {
 
         await TestBed.configureTestingModule({
             imports: [
-                TwoFactorComponent,
+                TwoFactorVerifyComponent,
                 TranslateModule.forRoot({
                     loader: { provide: TranslateLoader, useClass: TranslateFakeLoader }
                 })
@@ -31,7 +31,7 @@ describe('TwoFactorComponent', () => {
         })
             .compileComponents();
 
-        fixture = TestBed.createComponent(TwoFactorComponent);
+        fixture = TestBed.createComponent(TwoFactorVerifyComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

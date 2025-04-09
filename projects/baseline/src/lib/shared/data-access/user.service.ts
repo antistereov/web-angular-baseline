@@ -27,7 +27,7 @@ export class UserService {
     private _userLoaded = signal<boolean>(false);
 
     loggedIn = computed(() => this._user() !== undefined);
-    twoFactorAuthNeeded = signal<boolean>(false);
+    login2faVerificationNeeded = signal<boolean>(false);
 
 
     get user(): Signal<User | undefined> {
@@ -42,7 +42,7 @@ export class UserService {
         this.initializeUser();
 
         effect(() => {
-            if (this.twoFactorAuthNeeded()) {
+            if (this.login2faVerificationNeeded()) {
                 this.router.navigate(['/auth/two-factor']).then()
             }
         });
@@ -87,7 +87,7 @@ export class UserService {
     }
 
     private handleLoginResponse(res: LoginResponse): User {
-        this.twoFactorAuthNeeded.set(res.twoFactorRequired)
+        this.login2faVerificationNeeded.set(res.twoFactorRequired)
 
         return res.user;
     }

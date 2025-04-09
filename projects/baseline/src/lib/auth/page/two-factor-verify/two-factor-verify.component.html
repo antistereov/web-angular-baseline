@@ -1,0 +1,31 @@
+<base-auth-card
+    [cardTitle]="'auth.pages.2fa.verify.title' | translate"
+    [loaded]="this.userLoaded()"
+>
+    <div class="w-full flex flex-col items-center gap-2">
+        <p class="w-full">{{'auth.pages.2fa.verify.description' | translate }}</p>
+        <base-input-otp
+            [(ngModel)]="code"
+            (onChange)="onChange($event)"
+            class="my-2"
+            [autofocus]="true"
+        />
+
+        <base-button
+            type="submit"
+            [label]="'auth.pages.2fa.verify.submit' | translate"
+            [disabled]="loading || !this.isValid"
+            [loading]="loading"
+            (onClick)="submit()"
+        />
+    </div>
+
+    <base-divider/>
+
+    <div class="w-full">
+        <span class="text-sm">
+            {{'auth.pages.2fa.verify.recover.description' | translate }} <a routerLink="/auth/2fa/recover">{{'auth.pages.2fa.verify.recover.link' | translate}}</a>
+        </span>
+
+    </div>
+</base-auth-card>
