@@ -9,7 +9,6 @@ import {
     TwoFactorStatusResponse
 } from "@baseline/auth/model/two-factor.model";
 import {User} from "@baseline/shared/models/user.model";
-import {UserCustomDimension} from "@angular/cli/src/analytics/analytics-parameters";
 import {DeviceService} from "@baseline/auth/util/device.service";
 
 @Injectable({
