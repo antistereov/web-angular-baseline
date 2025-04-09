@@ -2,8 +2,30 @@
     [cardTitle]="'auth.pages.2fa.setup.title' | translate"
     [loaded]="userLoaded() && setupLoaded"
 >
+    <div>
+        <p>{{ 'auth.pages.2fa.setup.description' | translate }}</p>
+        <div *ngIf="twoFactorInfo()" class="w-full flex flex-col items-center">
+            <div class="w-full flex flex-col items-center"></div>
+            <qr-code [value]="twoFactorInfo()!!.optAuthUrl" [size]="200"/>
+            <span class="text-xs">{{ twoFactorInfo()?.secret }}</span>
+        </div>
 
-    <p *ngIf="twoFactorInfo()">{{ twoFactorInfo()!!.optAuthUrl}}</p>
+        <base-divider/>
 
-    <p *ngIf="twoFactorInfo()">{{ twoFactorInfo()!!.recoveryCode}}</p>
+        <p>{{ 'auth.pages.2fa.setup.recovery_description' | translate}}</p>
+
+        <pre class="w-full text-center mt-2">{{ twoFactorInfo()?.recoveryCode }}</pre>
+
+        <div>
+            <p-check-box inputId="agree"/>
+            <label for="agree">Label</label>
+        </div>
+    </div>
+
+
+    <div *ngIf="false" class="w-full flex flex-col items-center">
+        <base-input-otp
+            [(ngModel)]="code"
+        />
+    </div>
 </base-auth-card>
