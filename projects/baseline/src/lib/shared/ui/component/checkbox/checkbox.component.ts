@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ControlValueAccessor, FormsModule} from "@angular/forms";
-import {Checkbox} from "primeng/checkbox";
+import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
+import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {Checkbox, CheckboxChangeEvent} from "primeng/checkbox";
 
 @Component({
     selector: 'base-checkbox',
@@ -9,15 +9,23 @@ import {Checkbox} from "primeng/checkbox";
         FormsModule
     ],
     templateUrl: './checkbox.component.html',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => CheckboxComponent),
+            multi: true
+        }
+    ]
 })
 export class CheckboxComponent implements ControlValueAccessor {
     @Input() disabled: boolean = false;
     @Input() class: string = '';
-    @Input() trueValue: any;
-    @Input() falseValue: any;
+    @Input() trueValue: any = true;
+    @Input() falseValue: any = false;
     @Input() inputId?: string;
+    @Input() binary: boolean = true;
 
-    @Output() onChange = new EventEmitter<any>();
+    @Output() onChange = new EventEmitter<CheckboxChangeEvent>();
     @Output() onFocus = new EventEmitter<any>();
     @Output() onBlur = new EventEmitter<any>();
 
@@ -25,6 +33,11 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     onChangeFn: (_: any) => void = () => {};
     onTouchedFn: () => void = () => {};
+
+    handleChange(event: CheckboxChangeEvent) {
+        this.value = event.checked;
+        this.onChange.emit(event);
+    }
 
     writeValue(value: any) {
         this.value = value;
