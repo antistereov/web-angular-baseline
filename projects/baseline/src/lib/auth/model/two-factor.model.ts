@@ -1,7 +1,7 @@
 export interface TwoFactorSetupResponse {
     secret: string;
     optAuthUrl: string;
-    recoveryCode: string;
+    recoveryCodes: string[];
     token: string;
 }
 

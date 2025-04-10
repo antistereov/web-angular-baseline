@@ -7,12 +7,13 @@ import {toSignal} from "@angular/core/rxjs-interop";
 import {catchError, Observable, tap, throwError} from "rxjs";
 import {AuthCardComponent} from "@baseline/auth/ui/auth-card/auth-card.component";
 import {TranslatePipe} from "@ngx-translate/core";
-import {NgIf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {QrCodeComponent} from "ng-qrcode";
 import {InputOtpComponent} from "@baseline/shared/ui/component/input-otp/input-otp.component";
 import {FormsModule} from "@angular/forms";
+import {CheckboxComponent} from "@baseline/shared/ui/component/checkbox/checkbox.component";
+import {ButtonComponent} from "@baseline/shared/ui/component/button/button.component";
 import {DividerComponent} from "@baseline/shared/ui/component/divider/divider.component";
-import {Checkbox} from "primeng/checkbox";
 
 @Component({
   selector: 'base-two-factor-setup',
@@ -23,8 +24,10 @@ import {Checkbox} from "primeng/checkbox";
         QrCodeComponent,
         InputOtpComponent,
         FormsModule,
+        NgForOf,
+        CheckboxComponent,
+        ButtonComponent,
         DividerComponent,
-        Checkbox
     ],
   templateUrl: './two-factor-setup.component.html',
 })
@@ -40,6 +43,8 @@ export class TwoFactorSetupComponent {
     setupLoaded: boolean = false;
     userLoaded = this.userService.userLoaded;
     twoFactorInfo = toSignal(this.setup());
+
+    agreed: boolean = false;
 
     constructor() {
         this.redirectTo = this.route.snapshot.queryParamMap.get('redirect') || '/';

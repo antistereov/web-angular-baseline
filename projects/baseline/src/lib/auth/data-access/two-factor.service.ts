@@ -36,7 +36,9 @@ export class TwoFactorService {
     }
 
     recover(code: string): Observable<User> {
-        return this.httpClient.post<User>(`${this.apiBaseUrl}/user/2fa/recovery?code=${code}`, {}).pipe(
+        const device = this.deviceService.getDeviceInfo();
+
+        return this.httpClient.post<User>(`${this.apiBaseUrl}/user/2fa/recovery?code=${code}`, device).pipe(
             take(1)
         )
     }
