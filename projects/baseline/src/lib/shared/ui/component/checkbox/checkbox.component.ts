@@ -37,6 +37,7 @@ export class CheckboxComponent implements ControlValueAccessor {
     handleChange(event: CheckboxChangeEvent) {
         this.value = event.checked;
         this.onChange.emit(event);
+        this.onChangeFn(event.checked);
     }
 
     writeValue(value: any) {
