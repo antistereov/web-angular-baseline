@@ -1,0 +1,16 @@
+<div
+    class="relative rounded-xl bg-[var(--content-bg)] p-4 m-2 w-full"
+    (mouseenter)="hover = true"
+    (mouseleave)="hover = false"
+>
+    <base-button
+        *ngIf="hover && copyEnabled"
+        severity="secondary"
+        class="absolute top-1 right-1"
+        raised="true"
+        [icon]="copied ? 'pi pi-check' : 'pi pi-copy'"
+        (onClick)="copyContent()"
+    />
+
+    <ng-content/>
+</div>
