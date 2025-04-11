@@ -1,4 +1,4 @@
-import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
+import {booleanAttribute, Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
 import {InputOtpModule} from "primeng/inputotp";
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {NgIf} from "@angular/common";
@@ -20,7 +20,7 @@ export class InputOtpComponent implements ControlValueAccessor {
 
     @Input() disabled: boolean = false;
     @Input() length: number = 6;
-    @Input() autofocus: boolean = false;
+    @Input({transform: booleanAttribute}) autofocus: boolean = false;
     @Input() invalid: boolean = false;
     @Input() displayWarning: boolean = false;
     @Input() warning?: string;

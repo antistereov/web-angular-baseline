@@ -1,6 +1,7 @@
 <input
     [class]="(invalid ? 'ng-invalid ng-dirty' : '') + ' w-full'"
     pInputText
+    [autofocus]="autofocus"
     [type]="type"
     [value]="value"
     [placeholder]="placeholder"
@@ -8,6 +9,6 @@
     [readonly]="readonly"
     [class.focused]="isFocused"
     (input)="onInput($event)"
-    (blur)="onTouched()"
+    (blur)="onTouchedFn()"
 />
 <p *ngIf="displayWarning && warning" class="warning-text">{{ warning }}</p>
