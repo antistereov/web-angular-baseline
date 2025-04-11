@@ -13,6 +13,7 @@ import {Router} from '@angular/router';
 import {UserService} from '@baseline/shared/data-access/user.service';
 import {NgIf} from '@angular/common';
 import {TooltipDirective} from '@baseline/shared/ui/directive/tooltip/tooltip.directive';
+import {InfoPanelComponent} from "@baseline/shared/ui/component/info-panel/info-panel.component";
 
 @Component({
   selector: 'base-demo',
@@ -27,6 +28,7 @@ import {TooltipDirective} from '@baseline/shared/ui/directive/tooltip/tooltip.di
         DrawerComponent,
         TooltipDirective,
         NgIf,
+        InfoPanelComponent,
     ],
   templateUrl: './demo.component.html'
 })
