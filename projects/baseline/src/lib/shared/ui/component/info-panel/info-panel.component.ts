@@ -1,13 +1,14 @@
 import {Component, inject, Input} from '@angular/core';
 import {ButtonComponent} from "@baseline/shared/ui/component/button/button.component";
-import {NgIf} from "@angular/common";
+import {NgClass, NgIf} from "@angular/common";
 import {Clipboard} from "@angular/cdk/clipboard";
 
 @Component({
   selector: 'base-info-panel',
     imports: [
         ButtonComponent,
-        NgIf
+        NgIf,
+        NgClass
     ],
   templateUrl: './info-panel.component.html'
 })
