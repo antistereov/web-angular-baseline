@@ -12,8 +12,7 @@ describe('TwoFactorComponent', () => {
     beforeEach(async () => {
         const mockActivatedRoute = {
             snapshot: {
-                queryParamMap: convertToParamMap({ redirect: '/' }),
-                paramMap: convertToParamMap({ context: 'login' })
+                queryParamMap: convertToParamMap({ redirect: '/', context: 'login' }),
             }
         };
 

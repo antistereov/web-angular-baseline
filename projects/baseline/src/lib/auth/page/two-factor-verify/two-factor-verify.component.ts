@@ -6,7 +6,7 @@ import {
 } from "@angular/forms";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {TwoFactorService} from "@baseline/auth/data-access/two-factor.service";
-import {catchError, tap, throwError} from "rxjs";
+import {catchError, switchMap, tap, throwError} from "rxjs";
 import {AuthCardComponent} from "@baseline/auth/ui/auth-card/auth-card.component";
 import {TranslatePipe} from "@ngx-translate/core";
 import {ButtonComponent} from "@baseline/shared/ui/component/button/button.component";
@@ -23,12 +23,10 @@ import {DividerComponent} from "@baseline/shared/ui/component/divider/divider.co
         ButtonComponent,
         InputOtpComponent,
         FormsModule,
-        RouterLink,
-        DividerComponent
     ],
     templateUrl: './two-factor-verify.component.html',
 })
-export class TwoFactorVerifyComponent implements OnInit {
+export class TwoFactorVerifyComponent {
     context: 'login' | 'step-up' = 'login';
     redirectTo: string = '/';
     code: string = '';
@@ -44,15 +42,30 @@ export class TwoFactorVerifyComponent implements OnInit {
 
     constructor() {
         this.redirectTo = this.route.snapshot.queryParamMap.get('redirect') || '/';
+        this.context = this.route.snapshot.queryParamMap.get('context') as 'login' | 'step-up';
+
+        if (this.context === 'login') {
+            this.twoFactorService.getStatus(this.context).pipe(
+                tap((res) => {
+                    if (!res.twoFactorRequired) {
+                        this.router.navigate(['auth/login']).then()
+                    }
+                })
+            ).subscribe();
+        }
+
+        if (this.context === 'step-up') {
+            this.twoFactorService.getStatus('step-up').pipe(
+                tap((res) => {
+                    if (!res.twoFactorRequired) {
+                        this.router.navigate([this.redirectTo]).then();
+                    }
+                })
+            )
+        }
     }
 
-    ngOnInit() {
-        this.context = this.route.snapshot.paramMap.get('context') as 'login' | 'step-up';
-    }
-
-    onChange(event: any) {
-        console.log(event.value.length);
-        console.log(this.code);
+    onChange() {
         if (this.code?.length === 6) {
             this.isValid = true;
             this.submit();

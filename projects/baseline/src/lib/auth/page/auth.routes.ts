@@ -14,7 +14,7 @@ export const authRoutes: Routes = [
         loadComponent: () => import('@baseline/auth/page/verify-email/verify-email.component').then(c => c.VerifyEmailComponent)
     },
     {
-        path: '2fa/verify/:context',
+        path: '2fa/verify',
         loadComponent: () => import('@baseline/auth/page/two-factor-verify/two-factor-verify.component').then(c => c.TwoFactorVerifyComponent)
     },
     {

@@ -21,13 +21,14 @@ export class UserService {
     private deviceService = inject(DeviceService);
     private router = inject(Router);
 
-    private apiBaseUrl = inject(BASELINE_CONFIG).apiBaseUrl;
+    private baselineConfig = inject(BASELINE_CONFIG);
+    private apiBaseUrl = this.baselineConfig.apiBaseUrl;
+    private redirectTo = this.baselineConfig.auth.redirect.login;
 
     private _user = signal<User | undefined>(undefined);
     private _userLoaded = signal<boolean>(false);
 
     loggedIn = computed(() => this._user() !== undefined);
-    login2faVerificationNeeded = signal<boolean>(false);
 
 
     get user(): Signal<User | undefined> {
@@ -40,12 +41,6 @@ export class UserService {
 
     constructor() {
         this.initializeUser();
-
-        effect(() => {
-            if (this.login2faVerificationNeeded()) {
-                this.router.navigate(['/auth/two-factor']).then()
-            }
-        });
     }
 
     setUser(user: User | undefined) {
@@ -71,24 +66,33 @@ export class UserService {
         ).subscribe();
     }
 
-    login(credentials: LoginCredentials): Observable<User> {
+    login(credentials: LoginCredentials): Observable<LoginResponse> {
         const device = this.deviceService.getDeviceInfo();
         const loginRequest: LoginRequest = { ...credentials, device};
 
         return this.httpClient.post<LoginResponse>(`${this.apiBaseUrl}/user/login`, loginRequest).pipe(
             take(1),
-            map(res => this.handleLoginResponse(res)),
-            tap(user => this.setUser(user)),
             catchError((err: Error) => {
                 this.setUser(undefined);
                 return throwError(() => err);
-            })
+            }),
+            tap(res => this.handleLoginResponse(res))
         );
     }
 
-    private handleLoginResponse(res: LoginResponse): User {
-        this.login2faVerificationNeeded.set(res.twoFactorRequired)
+    private handleLoginResponse(res: LoginResponse): User | undefined {
+        console.log(res);
 
+        if (res.twoFactorRequired) {
+            this.router.navigate(['/auth/2fa/verify'] , { queryParams: { context: 'login' } }).then();
+
+            this.setUser(undefined);
+            return undefined;
+        }
+
+        this.router.navigate([this.redirectTo]).then();
+
+        this.setUser(res.user);
         return res.user;
     }
 

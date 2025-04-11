@@ -6,7 +6,7 @@
         <p class="w-full">{{'auth.pages.2fa.verify.description' | translate }}</p>
         <base-input-otp
             [(ngModel)]="code"
-            (onChange)="onChange($event)"
+            (onChange)="onChange()"
             class="my-2"
             [autofocus]="true"
         />
@@ -14,18 +14,15 @@
         <base-button
             type="submit"
             [label]="'auth.pages.2fa.verify.submit' | translate"
-            [disabled]="loading || !this.isValid"
+            [disabled]="loading || !isValid"
             [loading]="loading"
             (onClick)="submit()"
         />
-    </div>
 
-    <base-divider/>
-
-    <div class="w-full">
-        <span class="text-sm">
-            {{'auth.pages.2fa.verify.recover.description' | translate }} <a routerLink="/auth/2fa/recover">{{'auth.pages.2fa.verify.recover.link' | translate}}</a>
-        </span>
-
+        <base-button
+            [label]="'auth.pages.2fa.verify.recover' | translate"
+            variant="text"
+            severity="secondary"
+        />
     </div>
 </base-auth-card>

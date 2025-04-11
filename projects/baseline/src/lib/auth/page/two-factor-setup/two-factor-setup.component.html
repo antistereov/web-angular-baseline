@@ -1,39 +1,105 @@
 <base-auth-card
     [cardTitle]="'auth.pages.2fa.setup.title' | translate"
-    [loaded]="userLoaded() && setupLoaded"
+    [loaded]="userLoaded() && infoLoaded"
 >
     <div *ngIf="twoFactorInfo()" class="">
-        <p>{{ 'auth.pages.2fa.setup.description' | translate }}</p>
-        <div class="w-full flex flex-col items-center">
-            <div class="w-full flex flex-col items-center gap-1">
+
+        <!-- setup -->
+
+        <div
+            *ngIf="step === 'setup'"
+            class="w-full flex flex-col items-center"
+        >
+            <p>{{ 'auth.pages.2fa.setup.description' | translate }}</p>
+
+            <div
+                class="flex flex-col items-center"
+            >
                 <qr-code [value]="twoFactorInfo()!!.optAuthUrl" [size]="200"/>
                 <span class="text-xs">{{ twoFactorInfo()?.secret }}</span>
             </div>
+
+            <div class="flex flex-col gap-2 mt-4 items-center">
+                <base-button
+                    [label]="'auth.pages.2fa.setup.next' | translate"
+                    (onClick)="next()"
+                />
+            </div>
+
         </div>
 
-        <div class="flex flex-col items-center gap-2 py-2">
-            <p class="w-full font-bold">{{ 'auth.pages.2fa.setup.recovery_description' | translate }}</p>
+        <!-- recover -->
 
-            <div class="flex flex-wrap gap-1 w-80">
-                <pre *ngFor="let code of twoFactorInfo()!!.recoveryCodes" class="flex-1">{{ code }}</pre>
-            </div>
+        <div
+            *ngIf="step === 'recover'"
+            class="flex flex-col items-center gap-4"
+        >
+            <p class="w-full">{{ 'auth.pages.2fa.setup.recovery_description' | translate }}</p>
+
+            <base-info-panel
+                [copyEnabled]="true"
+                [copyText]="twoFactorInfo()!!.recoveryCodes.join(' ')"
+            >
+                <div class="flex flex-wrap gap-1 w-full text-sm">
+                    <pre *ngFor="let code of twoFactorInfo()!!.recoveryCodes" class="flex-1">{{ code }}</pre>
+                </div>
+            </base-info-panel>
 
             <div class="flex items-center gap-2 w-full">
                 <base-checkbox inputId="agree" [(ngModel)]="agreed"/>
                 <label for="agree">{{ 'auth.pages.2fa.setup.recovery_agree' | translate }}</label>
             </div>
+
+            <div class="flex flex-col gap-2 mt-2 items-center">
+                <base-button
+                    [label]="'auth.pages.2fa.setup.next' | translate"
+                    (onClick)="next()"
+                    [disabled]="!agreed"
+                />
+
+                <base-button
+                    [label]="'auth.pages.2fa.setup.previous' | translate "
+                    (onClick)="back()"
+                    variant="text"
+                    severity="secondary"
+                />
+            </div>
         </div>
 
-        <base-divider/>
+        <!-- verify -->
 
-        <div class="w-full flex flex-col gap-2 items-center">
-            <p class="w-full">Enter your code</p>
-            <base-input-otp [(ngModel)]="code"/>
-            <base-button
-                [disabled]="!agreed || code.length !== 6"
-                [label]="'Setup'"
-                (onClick)="setup()"
+        <div
+            *ngIf="step === 'verify'"
+            class="w-full flex flex-col items-center gap-2"
+        >
+            <p class="w-full">{{ 'auth.pages.2fa.setup.enter_code' | translate }}</p>
+            <base-input
+                class="w-full"
+                autofocus="true"
+                [invalid]="wrongCode"
+                [(ngModel)]="code"
+                (onChange)="onCodeChange()"
+                [warning]="'auth.pages.2fa.setup.wrong_code' | translate"
+                [displayWarning]="wrongCode"
             />
+
+            <div class="flex flex-col gap-2 items-center">
+                <base-button
+                    [disabled]="codeInvalid || loading"
+                    [label]="'auth.pages.2fa.setup.verify' | translate"
+                    (onClick)="submit()"
+                    [loading]="loading"
+                />
+
+                <base-button
+                    [label]="'auth.pages.2fa.setup.previous' | translate "
+                    (onClick)="back()"
+                    variant="text"
+                    severity="secondary"
+                />
+            </div>
+
+
         </div>
     </div>
 </base-auth-card>

@@ -56,10 +56,7 @@ export class TwoFactorService {
 
     getStatus(context: 'login' | 'step-up'): Observable<TwoFactorStatusResponse> {
         return this.httpClient.get<TwoFactorStatusResponse>(`${this.apiBaseUrl}/user/2fa/${context}-status`).pipe(
-            take(1),
-            tap((res) => {
-                this.userService.login2faVerificationNeeded.set(res.twoFactorRequired)
-            })
+            take(1)
         )
     }
 }
