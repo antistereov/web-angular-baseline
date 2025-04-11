@@ -1,6 +1,6 @@
-import {computed, effect, inject, Injectable, Signal, signal} from '@angular/core';
+import {computed, inject, Injectable, Signal, signal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {catchError, map, Observable, of, take, tap, throwError} from 'rxjs';
+import {catchError, Observable, of, take, tap, throwError} from 'rxjs';
 import {BASELINE_CONFIG} from '@baseline/core/config/base.config';
 import {User} from '@baseline/shared/models/user.model';
 import {DeviceService} from '@baseline/auth/util/device.service';

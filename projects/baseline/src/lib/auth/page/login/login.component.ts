@@ -2,7 +2,7 @@ import {Component, effect, inject} from '@angular/core';
 import {FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UserService} from '@baseline/shared/data-access/user.service';
 import {Router} from '@angular/router';
-import {catchError, of, switchMap, tap} from 'rxjs';
+import {catchError, of, tap} from 'rxjs';
 import {InputComponent} from '@baseline/shared/ui/component/input/input.component';
 import {ButtonComponent} from '@baseline/shared/ui/component/button/button.component';
 import {NgIf} from '@angular/common';

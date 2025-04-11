@@ -1,18 +1,16 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {
-    FormControl,
     FormsModule,
     ReactiveFormsModule,
 } from "@angular/forms";
-import {ActivatedRoute, Router, RouterLink} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {TwoFactorService} from "@baseline/auth/data-access/two-factor.service";
-import {catchError, switchMap, tap, throwError} from "rxjs";
+import {catchError, tap, throwError} from "rxjs";
 import {AuthCardComponent} from "@baseline/auth/ui/auth-card/auth-card.component";
 import {TranslatePipe} from "@ngx-translate/core";
 import {ButtonComponent} from "@baseline/shared/ui/component/button/button.component";
 import {InputOtpComponent} from "@baseline/shared/ui/component/input-otp/input-otp.component";
 import {UserService} from "@baseline/shared/data-access/user.service";
-import {DividerComponent} from "@baseline/shared/ui/component/divider/divider.component";
 
 @Component({
     selector: 'base-two-factor',
@@ -90,8 +88,4 @@ export class TwoFactorVerifyComponent {
             })
         ).subscribe();
     }
-}
-
-export interface TwoFactorForm {
-    code: FormControl<string>;
 }
