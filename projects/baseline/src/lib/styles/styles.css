@@ -4,9 +4,17 @@
 @import "primeicons/primeicons.css";
 
 @custom-variant dark (&:where(.dark-mode, .dark-mode *));
+
 :root {
     --primary-font: "Jost";
     --warning-text: #f87171;
+    --content-bg: var(--color-surface-100)
+}
+
+html.dark-mode,
+body.dark-mode,
+.dark-mode * {
+    --content-bg: var(--color-surface-800);
 }
 
 html, body {
