@@ -7,18 +7,23 @@
         <ng-container *ngTemplateOutlet="headerTemplate">
         </ng-container>
     </ng-template>
+
     <ng-template #title>
         <ng-container *ngTemplateOutlet="titleTemplate">
         </ng-container>
     </ng-template>
+
     <ng-template #subtitle>
         <ng-container *ngTemplateOutlet="subtitleTemplate">
         </ng-container>
     </ng-template>
+
     <ng-template #content>
         <ng-container *ngTemplateOutlet="contentTemplate">
         </ng-container>
+        <ng-content></ng-content>
     </ng-template>
+
     <ng-template #footer>
         <ng-container *ngTemplateOutlet="footerTemplate">
         </ng-container>

@@ -30,11 +30,9 @@ export class UserService {
 
     loggedIn = computed(() => this._user() !== undefined);
 
-
     get user(): Signal<User | undefined> {
         return this._user;
     }
-
     get userLoaded(): Signal<boolean> {
         return this._userLoaded;
     }

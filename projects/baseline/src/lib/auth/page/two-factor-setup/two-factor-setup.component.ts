@@ -57,7 +57,7 @@ export class TwoFactorSetupComponent {
         this.redirectTo = this.route.snapshot.queryParamMap.get('redirect') || '/';
 
         effect(() => {
-            if (this.userService.userLoaded() && this.userService.user()?.twoFactorEnabled) {
+            if (this.userService.userLoaded() && this.userService.user()?.twoFactorAuthEnabled) {
                 this.router.navigate([this.redirectTo]).then()
             }
         })
@@ -89,10 +89,10 @@ export class TwoFactorSetupComponent {
         this.loading = true;
 
         this.twoFactorService.setup(parseInt(this.code), token).pipe(
-            switchMap((user) => {
+            switchMap(() => {
                 this.loading = false;
-                this.userService.setUser(user);
-                this.router.navigate([this.redirectTo]).then();
+                this.userService.setUser(undefined);
+                this.router.navigate(['']).then();
                 return of(true);
             }),
             catchError((err: HttpErrorResponse) => {

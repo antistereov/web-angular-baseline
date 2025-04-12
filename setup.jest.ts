@@ -27,7 +27,7 @@ export const mockUser: User = {
         id: 'device_id',
         lastActive: new Date(2025, 0, 1)
     }],
-    twoFactorEnabled: false,
+    twoFactorAuthEnabled: false,
     lastActive: new Date('2025-01-01'),
     app: {}
 }

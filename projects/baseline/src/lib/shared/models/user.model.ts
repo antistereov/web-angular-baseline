@@ -6,7 +6,7 @@ export interface User {
     emailVerified: boolean;
     devices: DeviceInfo[];
     lastActive: Date;
-    twoFactorEnabled: boolean;
+    twoFactorAuthEnabled: boolean;
     app: ApplicationInfo;
 }
 

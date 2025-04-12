@@ -1,6 +1,6 @@
 <div class="h-full flex flex-col justify-center items-center p-2">
     <base-card class="w-full max-w-sm">
-        <ng-template #title>
+        <ng-template #title *ngIf="cardTitle !== ''">
             <ng-container *ngIf="loaded; else titleSkeleton">
                 {{ cardTitle }}
             </ng-container>

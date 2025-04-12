@@ -8,13 +8,17 @@
 :root {
     --primary-font: "Jost";
     --warning-text: #f87171;
-    --content-bg: var(--color-surface-100)
+    --content-bg: var(--color-surface-100);
+    --body-bg: var(--color-surface-0);
+    --border: var(--color-surface-300);
 }
 
 html.dark-mode,
 body.dark-mode,
 .dark-mode * {
     --content-bg: var(--color-surface-800);
+    --body-bg: var(--color-surface-900);
+    --border: var(--color-surface-600);
 }
 
 html, body {

@@ -55,11 +55,12 @@ export class TwoFactorVerifyComponent {
         if (this.context === 'step-up') {
             this.twoFactorService.getStatus('step-up').pipe(
                 tap((res) => {
+                    console.log(res.twoFactorRequired)
                     if (!res.twoFactorRequired) {
-                        this.router.navigate([this.redirectTo]).then();
+                        this.router.navigate([this.redirectTo], { queryParams: { 'step-up': 'true' } }).then();
                     }
                 })
-            )
+            ).subscribe();
         }
     }
 
@@ -79,7 +80,7 @@ export class TwoFactorVerifyComponent {
 
         this.twoFactorService.verify(parseInt(this.code), this.context).pipe(
             tap(() => {
-                this.router.navigate([this.redirectTo]).then();
+                this.router.navigate([this.redirectTo], { queryParams: { 'step-up': true } }).then();
                 this.loading = false;
             }),
             catchError((err) => {
