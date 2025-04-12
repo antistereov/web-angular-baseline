@@ -1,0 +1,40 @@
+<base-card>
+    <ng-template #title>
+        <div class="flex justify-between items-center">
+            <span>Security Settings</span>
+
+            <base-button
+                [label]="changeEnabled ? 'Done' : 'Change'"
+                (onClick)="toggleChange()"
+                severity="secondary"
+                variant="outlined"
+                size="small"
+                [loading]="statusLoading"
+            />
+        </div>
+    </ng-template>
+
+
+    <ng-container *ngIf="changeEnabled; else readOnly">
+        <base-button
+            *ngIf="user()?.twoFactorAuthEnabled"
+            (onClick)="disableTwoFactor()"
+            label="Disable 2FA"
+        />
+
+        <base-button
+            *ngIf="!user()?.twoFactorAuthEnabled"
+            (onClick)="setupTwoFactor()"
+            label="Enable 2FA"
+        />
+    </ng-container>
+
+    <ng-template #readOnly>
+        <div class="flex flex-col">
+            <span>Email: {{ this.user()?.email }}</span>
+            <span>2FA: {{ twoFactorEnabled() ? 'enabled' : 'disabled' }}</span>
+        </div>
+    </ng-template>
+
+</base-card>
+
