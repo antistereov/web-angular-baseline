@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserSecuritySettings } from './user-security-settings.component';
+import { UserSettingsCard } from './user-settings-card.component';
 import {provideHttpClient} from "@angular/common/http";
 import {ActivatedRoute, convertToParamMap} from "@angular/router";
 
 describe('AdvancedUserSettingsComponent', () => {
-    let component: UserSecuritySettings;
-    let fixture: ComponentFixture<UserSecuritySettings>;
+    let component: UserSettingsCard;
+    let fixture: ComponentFixture<UserSettingsCard>;
 
     beforeEach(async () => {
         const mockActivatedRoute = {
@@ -16,7 +16,7 @@ describe('AdvancedUserSettingsComponent', () => {
         };
 
         await TestBed.configureTestingModule({
-            imports: [UserSecuritySettings],
+            imports: [UserSettingsCard],
             providers: [
                 { provide: ActivatedRoute, useValue: mockActivatedRoute },
                 provideHttpClient()
@@ -24,7 +24,7 @@ describe('AdvancedUserSettingsComponent', () => {
         })
             .compileComponents();
 
-        fixture = TestBed.createComponent(UserSecuritySettings);
+        fixture = TestBed.createComponent(UserSettingsCard);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
