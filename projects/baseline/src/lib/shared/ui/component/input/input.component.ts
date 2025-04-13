@@ -2,6 +2,7 @@ import {booleanAttribute, Component, EventEmitter, forwardRef, input, Input, Out
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {InputText} from 'primeng/inputtext';
+import {FloatLabel} from "primeng/floatlabel";
 
 @Component({
     selector: 'base-input',
@@ -9,6 +10,7 @@ import {InputText} from 'primeng/inputtext';
         CommonModule,
         FormsModule,
         InputText,
+        FloatLabel,
     ],
     templateUrl: './input.component.html',
     providers: [
@@ -29,6 +31,7 @@ export class InputComponent implements ControlValueAccessor {
     @Input() displayWarning: boolean = false;
     @Input() warning?: string;
     @Input({transform: booleanAttribute}) autofocus = false;
+    @Input() label?: string;
 
     @Output() onChange = new EventEmitter<any>();
 
