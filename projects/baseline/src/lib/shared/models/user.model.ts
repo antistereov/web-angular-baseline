@@ -8,6 +8,7 @@ export interface User {
     lastActive: Date;
     twoFactorAuthEnabled: boolean;
     app: ApplicationInfo;
+    avatar?: string;
 }
 
 type MimeType = 'image/jpeg' | 'image/png' | 'image/jpg' | 'image/gif' | 'application/pdf' | 'text/plain';
