@@ -1,0 +1,34 @@
+<div class="flex gap-2 items-center">
+    <base-avatar
+        [image]="avatar()"
+        shape="circle"
+        size="xlarge"
+        [label]="user()?.name?.at(0)?.toUpperCase()"
+    />
+
+    <div class="flex gap-2">
+        <base-file-upload
+            (uploadHandler)="setAvatar($event)"
+            [accept]="'image/*'"
+            [customUpload]="true"
+            [mode]="'basic'"
+            [auto]="true"
+            [chooseLabel]="'Update'"
+            [chooseIcon]="'pi pi-user-edit'"
+            [chooseButtonProps]="{ loading: uploading }"
+        />
+
+        <base-button
+            icon="pi pi-times"
+            severity="secondary"
+            [disabled]="!avatar()"
+            [label]="'Delete'"
+            (onClick)="deleteAvatar()"
+            [loading]="deleting"
+        />
+    </div>
+
+
+</div>
+
+
