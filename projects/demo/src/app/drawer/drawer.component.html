@@ -2,46 +2,59 @@
     [visible]="visible()"
     title="Drawer"
     (visibleChange)="setVisibility($event)"
+    class="backdrop-blur-2xl bg-[var(--body-bg)]/80 border-0"
 >
     <ng-template #footer>
-        <div class="flex flex-row w-full gap-2 items-center">
-            <div
+        <div class="w-full flex justify-between">
+            <ng-container
                 *ngIf="!userService.loggedIn(); else loggedIn"
                 class="flex flex-row w-full gap-2"
             >
 
                 <base-button
                     label="Login"
-                    (onClick)="router.navigate(['/auth/login'])"
+                    (onClick)="navigateToLogin()"
                     class="w-full"
                 />
 
                 <base-button
                     label="Register"
                     severity="secondary"
-                    (onClick)="router.navigate(['/auth/register'])"
+                    (onClick)="navigateToRegister()"
                     class="w-full"
                 />
-            </div>
+            </ng-container>
 
-            <ng-template #loggedIn class="flex flex-row w-full gap-2">
-                <p class="w-full">{{ user()?.name }}</p>
-                <base-button
-                    text="true"
-                    severity="secondary"
-                    icon="pi pi-sign-out"
-                    baseTooltip="Sign out"
-                    (onClick)="userService.logout().subscribe()"
-                />
+            <ng-template #loggedIn class="flex w-full justify-between">
+                <div class="flex gap-2 items-center">
+                    <base-avatar
+                        [image]="userService.avatar()"
+                        [label]="user()?.name?.at(0)?.toUpperCase()"
+                    />
+                    <p class="w-full">{{ user()?.name }}</p>
+
+                </div>
+                <div>
+                    <base-button
+                        text="true"
+                        severity="secondary"
+                        icon="pi pi-sign-out"
+                        baseTooltip="Sign out"
+                        [loading]="logoutLoading"
+                        (onClick)="logout()"
+                    />
+
+                    <base-button
+                        icon="pi pi-cog"
+                        text="true"
+                        severity="secondary"
+                        (onClick)="navigateToSettings()"
+                    />
+                </div>
 
             </ng-template>
 
-            <base-button
-                icon="pi pi-cog"
-                text="true"
-                severity="secondary"
-                (onClick)="navigateToSettings()"
-            />
+
         </div>
 
 

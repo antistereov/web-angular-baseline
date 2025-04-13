@@ -6,6 +6,8 @@ import {TooltipDirective} from "@baseline/shared/ui/directive/tooltip/tooltip.di
 import {DrawerService} from "./drawer.service";
 import {UserService} from "@baseline/shared/data-access/user.service";
 import {Router} from "@angular/router";
+import {catchError, tap, throwError} from "rxjs";
+import {AvatarComponent} from "@baseline/shared/ui/component/avatar/avatar.component";
 
 @Component({
   selector: 'app-drawer',
@@ -13,7 +15,8 @@ import {Router} from "@angular/router";
         ButtonComponent,
         DrawerComponent,
         NgIf,
-        TooltipDirective
+        TooltipDirective,
+        AvatarComponent
     ],
   templateUrl: './drawer.component.html'
 })
@@ -22,6 +25,8 @@ export class AppDrawerComponent {
 
     userService = inject(UserService);
     router = inject(Router);
+
+    logoutLoading = false;
 
     user = this.userService.user;
 
@@ -35,5 +40,29 @@ export class AppDrawerComponent {
         this.router.navigate(['me']).then()
 
         this.setVisibility(false);
+    }
+
+    navigateToLogin() {
+        this.router.navigate(['/auth/login']).then();
+        this.setVisibility(false);
+    }
+
+    navigateToRegister() {
+        this.router.navigate(['/auth/register']).then();
+        this.setVisibility(false);
+    }
+
+    logout() {
+        this.logoutLoading = true;
+
+        this.userService.logout().pipe(
+            tap(() => {
+                this.logoutLoading = false;
+            }),
+            catchError((err) => {
+                this.logoutLoading = false;
+                return throwError(() => err);
+            })
+        ).subscribe()
     }
 }
