@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AppDrawerComponent } from './drawer.component';
+import {AppDrawerComponent} from './drawer.component';
 import {provideHttpClient} from "@angular/common/http";
 
 describe('SidebarComponent', () => {

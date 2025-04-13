@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { TwoFactorService } from './two-factor.service';
+import {TwoFactorService} from './two-factor.service';
 import {provideHttpClient} from "@angular/common/http";
 
 describe('TwoFactorService', () => {

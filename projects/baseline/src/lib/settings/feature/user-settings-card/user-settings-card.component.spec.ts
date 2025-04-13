@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { UserSettingsCard } from './user-settings-card.component';
+import {UserSettingsCard} from './user-settings-card.component';
 import {provideHttpClient} from "@angular/common/http";
 import {ActivatedRoute, convertToParamMap} from "@angular/router";
 

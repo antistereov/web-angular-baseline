@@ -1,30 +1,18 @@
 import {Component, computed, inject, OnInit} from '@angular/core';
 import {UserService} from "@baseline/shared/data-access/user.service";
-import {NgIf} from "@angular/common";
 import {TwoFactorService} from "@baseline/auth/data-access/two-factor.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CardComponent} from "@baseline/shared/ui/component/card/card.component";
-import {ButtonComponent} from "@baseline/shared/ui/component/button/button.component";
 import {tap} from "rxjs";
-import {InputComponent} from "@baseline/shared/ui/component/input/input.component";
-import {DividerComponent} from "@baseline/shared/ui/component/divider/divider.component";
 import {FormsModule} from "@angular/forms";
-import {AvatarComponent} from "@baseline/shared/ui/component/avatar/avatar.component";
-import {FileUploadComponent} from "@baseline/shared/ui/component/file-upload/file-upload.component";
-import {FileUploadHandlerEvent} from "primeng/fileupload";
 import {UserSettingsService} from "@baseline/settings/data-access/user-settings.service";
 import {AvatarSettingsComponent} from "@baseline/settings/feature/avatar-settings/avatar-settings.component";
 
 @Component({
   selector: 'base-user-settings-card',
     imports: [
-        NgIf,
         CardComponent,
-        ButtonComponent,
-        InputComponent,
         FormsModule,
-        AvatarComponent,
-        FileUploadComponent,
         AvatarSettingsComponent
     ],
   templateUrl: './user-settings-card.component.html'

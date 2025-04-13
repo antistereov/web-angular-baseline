@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TwoFactorVerifyComponent } from './two-factor-verify.component';
+import {TwoFactorVerifyComponent} from './two-factor-verify.component';
 import {ActivatedRoute, convertToParamMap} from "@angular/router";
 import {provideHttpClient} from "@angular/common/http";
 import {TranslateFakeLoader, TranslateLoader, TranslateModule} from "@ngx-translate/core";

@@ -1,8 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {
-    FormsModule,
-    ReactiveFormsModule,
-} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule,} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {TwoFactorService} from "@baseline/auth/data-access/two-factor.service";
 import {catchError, tap, throwError} from "rxjs";

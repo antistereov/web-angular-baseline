@@ -1,10 +1,15 @@
-import {Component, EventEmitter, Input, output, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {
-    FileBeforeUploadEvent, FileProgressEvent, FileRemoveEvent, FileSelectEvent,
+    FileBeforeUploadEvent,
+    FileProgressEvent,
+    FileRemoveEvent,
+    FileSelectEvent,
     FileSendEvent,
     FileUpload,
     FileUploadErrorEvent,
-    FileUploadEvent, FileUploadHandlerEvent, RemoveUploadedFileEvent
+    FileUploadEvent,
+    FileUploadHandlerEvent,
+    RemoveUploadedFileEvent
 } from "primeng/fileupload";
 import {HttpHeaders} from "@angular/common/http";
 import {ButtonProps} from "primeng/button";

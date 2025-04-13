@@ -1,8 +1,8 @@
-import {inject, Injectable, signal, Signal} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {BASELINE_CONFIG} from "@baseline/core/config/base.config";
 import {UserService} from "@baseline/shared/data-access/user.service";
-import {catchError, Observable, of, take, tap, throwError} from "rxjs";
+import {catchError, Observable, take, tap, throwError} from "rxjs";
 import {
     TwoFactorSetupRequest,
     TwoFactorSetupResponse,

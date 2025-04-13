@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FileUploadComponent } from './file-upload.component';
+import {FileUploadComponent} from './file-upload.component';
 import {provideHttpClient} from "@angular/common/http";
 
 describe('FileUploadComponent', () => {

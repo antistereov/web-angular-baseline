@@ -1,9 +1,9 @@
 import {inject, Injectable} from '@angular/core';
 import {UserService} from "@baseline/shared/data-access/user.service";
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {ChangeEmailRequest, ChangePasswordRequest} from "@baseline/settings/model/user-security.model";
-import {catchError, Observable, of, tap, throwError} from "rxjs";
-import {FileResource, User} from "@baseline/shared/models/user.model";
+import {Observable, tap} from "rxjs";
+import {User} from "@baseline/shared/models/user.model";
 import {BASELINE_CONFIG} from "@baseline/core/config/base.config";
 
 @Injectable({

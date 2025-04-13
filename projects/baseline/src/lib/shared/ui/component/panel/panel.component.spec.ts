@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PanelComponent } from './panel.component';
+import {PanelComponent} from './panel.component';
 import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
 
 describe('PanelComponent', () => {
