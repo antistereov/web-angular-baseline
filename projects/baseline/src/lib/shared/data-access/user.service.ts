@@ -27,6 +27,7 @@ export class UserService {
 
     private _user = signal<User | undefined>(undefined);
     private _userLoaded = signal<boolean>(false);
+    avatar = computed(() => this.user()?.avatar)
 
     loggedIn = computed(() => this._user() !== undefined);
 
