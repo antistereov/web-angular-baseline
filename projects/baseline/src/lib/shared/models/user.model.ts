@@ -10,6 +10,13 @@ export interface User {
     app: ApplicationInfo;
 }
 
+type MimeType = 'image/jpeg' | 'image/png' | 'image/jpg' | 'image/gif' | 'application/pdf' | 'text/plain';
+
+export interface FileResource {
+    file: Blob | File;
+    type: MimeType;
+}
+
 export interface ApplicationInfo {}
 
 export interface DeviceInfo {
