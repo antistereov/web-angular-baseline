@@ -1,13 +1,11 @@
 import {Component, inject} from '@angular/core';
 import {TwoFactorService} from "@baseline/auth/data-access/two-factor.service";
-import {
-    UserSecuritySettings
-} from "@baseline/settings/feature/advanced-user-settings/user-security-settings.component";
+import {UserSettingsCard} from "@baseline/settings/feature/user-settings-card/user-settings-card.component";
 
 @Component({
   selector: 'app-me',
     imports: [
-        UserSecuritySettings
+        UserSettingsCard
     ],
   templateUrl: './me.component.html'
 })
