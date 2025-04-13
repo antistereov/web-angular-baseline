@@ -1,5 +1,5 @@
 import {booleanAttribute, Component, EventEmitter, Input, Output} from '@angular/core';
-import {Button} from 'primeng/button';
+import {Button, ButtonProps} from 'primeng/button';
 
 @Component({
     selector: 'base-button',
@@ -31,7 +31,7 @@ export class ButtonComponent {
     @Input() ariaLabel?: string;
     @Input() autofocus: boolean = false;
     @Input() fluid: boolean = false;
-    @Input() buttonProps?: any;
+    @Input() buttonProps?: ButtonProps;
 
     @Output() onClick = new EventEmitter<MouseEvent>();
     @Output() onFocus = new EventEmitter<FocusEvent>();

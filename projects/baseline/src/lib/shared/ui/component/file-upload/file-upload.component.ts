@@ -7,6 +7,7 @@ import {
     FileUploadEvent, FileUploadHandlerEvent, RemoveUploadedFileEvent
 } from "primeng/fileupload";
 import {HttpHeaders} from "@angular/common/http";
+import {ButtonProps} from "primeng/button";
 
 @Component({
   selector: 'base-file-upload',
@@ -47,6 +48,10 @@ export class FileUploadComponent {
     @Input() chooseIcon?: string;
     @Input() uploadIcon?: string;
     @Input() cancelIcon?: string;
+
+    @Input() chooseButtonProps: ButtonProps = {};
+    @Input() uploadButtonProps: ButtonProps = {};
+    @Input() cancelButtonProps: ButtonProps = {};
 
     @Input() showUploadButton = true;
     @Input() showCancelButton = true;
