@@ -78,10 +78,6 @@ export class UserSettingsCard implements OnInit {
         ).subscribe()
     }
 
-    disableTwoFactor() {
-        this.twoFactorService.disable().subscribe();
-    }
-
     setupTwoFactor() {
         this.router.navigate(['auth/2fa/setup']).then();
     }

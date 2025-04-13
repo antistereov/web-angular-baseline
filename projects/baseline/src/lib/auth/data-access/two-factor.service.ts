@@ -4,6 +4,7 @@ import {BASELINE_CONFIG} from "@baseline/core/config/base.config";
 import {UserService} from "@baseline/shared/data-access/user.service";
 import {catchError, Observable, take, tap, throwError} from "rxjs";
 import {
+    DisableTwoFactorRequest,
     TwoFactorSetupRequest,
     TwoFactorSetupResponse,
     TwoFactorStatusResponse
@@ -37,11 +38,12 @@ export class TwoFactorService {
         )
     }
 
-    recover(code: string): Observable<User> {
+    recover(code: string, context: 'step-up' | 'login'): Observable<User> {
         const device = this.deviceService.getDeviceInfo();
 
-        return this.httpClient.post<User>(`${this.apiBaseUrl}/user/2fa/recovery?code=${code}`, device).pipe(
-            take(1)
+        return this.httpClient.post<User>(`${this.apiBaseUrl}/user/2fa/recovery?code=${code}&context=${context}`, device).pipe(
+            take(1),
+            tap((user) => this.userService.setUser(user))
         )
     }
 
@@ -62,8 +64,8 @@ export class TwoFactorService {
         )
     }
 
-    disable(): Observable<User | undefined> {
-        return this.httpClient.post<User>(`${this.apiBaseUrl}/user/2fa/disable`, {}).pipe(
+    disable(req: DisableTwoFactorRequest): Observable<User | undefined> {
+        return this.httpClient.post<User>(`${this.apiBaseUrl}/user/2fa/disable`, req).pipe(
             tap((user) => this.userService.setUser(user)),
             catchError((err: HttpErrorResponse) => {
                 return throwError(() => err);

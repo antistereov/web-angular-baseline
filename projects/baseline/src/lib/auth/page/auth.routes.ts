@@ -20,5 +20,9 @@ export const authRoutes: Routes = [
     {
         path: '2fa/setup',
         loadComponent: () => import('@baseline/auth/page/two-factor-setup/two-factor-setup.component').then(c => c.TwoFactorSetupComponent)
+    },
+    {
+        path: '2fa/recovery',
+        loadComponent: () => import('@baseline/auth/page/two-factor-recovery/two-factor-recovery.component').then(c => c.TwoFactorRecoveryComponent)
     }
 ]

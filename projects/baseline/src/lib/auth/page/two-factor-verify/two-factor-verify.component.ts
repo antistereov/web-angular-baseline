@@ -86,4 +86,8 @@ export class TwoFactorVerifyComponent {
             })
         ).subscribe();
     }
+
+    recover() {
+        this.router.navigate(['/auth/2fa/recovery'], { queryParams: { 'context': this.context }}).then()
+    }
 }

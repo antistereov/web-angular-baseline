@@ -11,8 +11,4 @@ import {UserSettingsCard} from "@baseline/settings/feature/user-settings-card/us
 })
 export class MeComponent {
     private twoFactorService = inject(TwoFactorService);
-
-    disable2fa() {
-        this.twoFactorService.disable();
-    }
 }

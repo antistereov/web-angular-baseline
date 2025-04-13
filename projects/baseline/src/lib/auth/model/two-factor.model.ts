@@ -13,3 +13,7 @@ export interface TwoFactorSetupRequest {
     token: string;
     code: number;
 }
+
+export interface DisableTwoFactorRequest {
+    password: string;
+}
