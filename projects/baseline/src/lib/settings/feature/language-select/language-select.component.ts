@@ -15,6 +15,7 @@ import {Language, LanguageService} from "@baseline/core/translate/language.servi
 })
 export class LanguageSelectComponent {
     @Input() class?: string;
+    @Input() size?: 'small' | 'large';
 
     private languageService = inject(LanguageService);
 
