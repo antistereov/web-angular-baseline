@@ -1,11 +1,28 @@
-<p-select
-    [placeholder]="placeholder"
-    class="base-select"
-    [options]="options"
-    [disabled]="disabled"
-    [styleClass]="class"
-    (onChange)="onSelect($event)"
-    [(ngModel)]="value"
-    [optionLabel]="optionLabel"
->
-</p-select>
+<ng-container *ngIf="size; else defaultSize">
+    <p-select
+        [placeholder]="placeholder"
+        class="base-select"
+        [options]="options"
+        [disabled]="disabled"
+        [styleClass]="class"
+        (onChange)="onSelect($event)"
+        [(ngModel)]="value"
+        [optionLabel]="optionLabel"
+        [size]="size"
+    >
+    </p-select>
+</ng-container>
+
+<ng-template #defaultSize>
+    <p-select
+        [placeholder]="placeholder"
+        class="base-select"
+        [options]="options"
+        [disabled]="disabled"
+        [styleClass]="class"
+        (onChange)="onSelect($event)"
+        [(ngModel)]="value"
+        [optionLabel]="optionLabel"
+    >
+    </p-select>
+</ng-template>
