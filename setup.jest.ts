@@ -1,5 +1,5 @@
 import {setupZoneTestEnv} from 'jest-preset-angular/setup-env/zone/index'
-import {User} from "@baseline/shared/models/user.model";
+import {User} from "@baseline/shared/model/user.model";
 
 setupZoneTestEnv()
 

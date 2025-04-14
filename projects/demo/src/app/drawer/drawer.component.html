@@ -28,7 +28,7 @@
             <ng-template #loggedIn class="flex w-full justify-between">
                 <div class="flex gap-2 items-center">
                     <base-avatar
-                        [image]="userService.avatar()"
+                        [image]="userService.avatar()?.publicUrl"
                         [label]="user()?.name?.at(0)?.toUpperCase()"
                     />
                     <p class="w-full">{{ user()?.name }}</p>

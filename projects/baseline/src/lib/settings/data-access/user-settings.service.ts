@@ -3,8 +3,8 @@ import {UserService} from "@baseline/shared/data-access/user.service";
 import {HttpClient} from "@angular/common/http";
 import {ChangeEmailRequest, ChangePasswordRequest} from "@baseline/settings/model/user-security.model";
 import {Observable, tap} from "rxjs";
-import {User} from "@baseline/shared/models/user.model";
 import {BASELINE_CONFIG} from "@baseline/core/config/base.config";
+import {User} from "@baseline/shared/model/user.model";
 
 @Injectable({
     providedIn: 'root'

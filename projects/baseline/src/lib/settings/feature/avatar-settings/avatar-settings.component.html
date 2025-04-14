@@ -1,6 +1,6 @@
 <div class="flex gap-2 items-center">
     <base-avatar
-        [image]="avatar()"
+        [image]="avatar()?.publicUrl"
         shape="circle"
         size="xlarge"
         [label]="user()?.name?.at(0)?.toUpperCase()"

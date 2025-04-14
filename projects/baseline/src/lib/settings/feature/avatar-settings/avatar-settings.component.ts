@@ -31,8 +31,6 @@ export class AvatarSettingsComponent {
         this.uploading = true;
         const file = event.files.at(0)
 
-        console.log(file);
-
         this.userSettingsService.setAvatar(file!!).pipe(
             tap(() => this.uploading = false),
             catchError((err) => {

@@ -1,4 +1,4 @@
-import {User} from '@baseline/shared/models/user.model';
+import {User} from "@baseline/shared/model/user.model";
 
 export interface DeviceInfoRequest {
     id: string;

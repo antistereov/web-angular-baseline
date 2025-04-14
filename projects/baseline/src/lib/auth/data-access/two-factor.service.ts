@@ -9,8 +9,8 @@ import {
     TwoFactorSetupResponse,
     TwoFactorStatusResponse
 } from "@baseline/auth/model/two-factor.model";
-import {User} from "@baseline/shared/models/user.model";
 import {DeviceService} from "@baseline/auth/util/device.service";
+import {User} from "@baseline/shared/model/user.model";
 
 @Injectable({
   providedIn: 'root'

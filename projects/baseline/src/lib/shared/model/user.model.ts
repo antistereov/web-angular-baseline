@@ -1,3 +1,5 @@
+import {FileMetaData} from "@baseline/shared/model/file.model";
+
 export interface User {
     id: string;
     name?: string;
@@ -8,7 +10,7 @@ export interface User {
     lastActive: Date;
     twoFactorAuthEnabled: boolean;
     app: ApplicationInfo;
-    avatar?: string;
+    avatar?: FileMetaData;
 }
 
 type MimeType = 'image/jpeg' | 'image/png' | 'image/jpg' | 'image/gif' | 'application/pdf' | 'text/plain';
