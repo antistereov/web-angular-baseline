@@ -1,13 +1,21 @@
-<input
-    [class]="(invalid ? 'ng-invalid ng-dirty' : '') + ' w-full'"
-    pInputText
-    [type]="type"
-    [value]="value"
-    [placeholder]="placeholder"
-    [disabled]="disabled"
-    [readonly]="readonly"
-    [class.focused]="isFocused"
-    (input)="onInput($event)"
-    (blur)="onTouched()"
-/>
-<p *ngIf="displayWarning && warning" class="warning-text">{{ warning }}</p>
+<p-floatlabel
+    variant="on"
+>
+    <label *ngIf="label" for="input">{{ label }}</label>
+    <input
+        [class]="(invalid ? 'ng-invalid ng-dirty' : '') + ' w-full'"
+        pInputText
+        [autofocus]="autofocus"
+        [type]="type"
+        [value]="value"
+        [placeholder]="placeholder"
+        [disabled]="disabled"
+        [readonly]="readonly"
+        [class.focused]="isFocused"
+        (input)="onInput($event)"
+        (blur)="onTouchedFn()"
+        id="input"
+        [attr.autocomplete]="autocomplete"
+    />
+    <small id="input-help" *ngIf="displayWarning && warning" class="warning-text">{{ warning }}</small>
+</p-floatlabel>

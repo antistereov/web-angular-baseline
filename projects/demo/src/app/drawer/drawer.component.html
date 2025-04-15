@@ -1,0 +1,62 @@
+<base-drawer
+    [visible]="visible()"
+    title="Drawer"
+    (visibleChange)="setVisibility($event)"
+    class="backdrop-blur-2xl bg-[var(--body-bg)]/80 border-0"
+>
+    <ng-template #footer>
+        <div class="w-full flex justify-between gap-2">
+            <ng-container
+                *ngIf="!userService.loggedIn(); else loggedIn"
+                class="flex flex-row w-full gap-2"
+            >
+
+                <base-button
+                    label="Login"
+                    (onClick)="navigateToLogin()"
+                    class="w-full"
+                />
+
+                <base-button
+                    label="Register"
+                    severity="secondary"
+                    (onClick)="navigateToRegister()"
+                    class="w-full"
+                />
+            </ng-container>
+
+            <ng-template #loggedIn class="flex w-full justify-between">
+                <div class="flex gap-2 items-center">
+                    <base-avatar
+                        [image]="userService.avatar()?.publicUrl"
+                        [label]="user()?.name?.at(0)?.toUpperCase()"
+                    />
+                    <p class="w-full">{{ user()?.name }}</p>
+
+                </div>
+                <div>
+                    <base-button
+                        text="true"
+                        severity="secondary"
+                        icon="pi pi-sign-out"
+                        baseTooltip="Sign out"
+                        [loading]="logoutLoading"
+                        (onClick)="logout()"
+                    />
+
+                    <base-button
+                        icon="pi pi-cog"
+                        text="true"
+                        severity="secondary"
+                        (onClick)="navigateToSettings()"
+                    />
+                </div>
+
+            </ng-template>
+
+
+        </div>
+
+
+    </ng-template>
+</base-drawer>

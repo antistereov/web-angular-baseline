@@ -6,7 +6,7 @@ import {
     SelectButtonOptionClickEvent
 } from 'primeng/selectbutton';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {NgTemplateOutlet} from '@angular/common';
+import {NgIf, NgTemplateOutlet} from '@angular/common';
 
 @Component({
     selector: 'base-select-button',
@@ -15,6 +15,7 @@ import {NgTemplateOutlet} from '@angular/common';
         SelectButtonModule,
         FormsModule,
         NgTemplateOutlet,
+        NgIf,
     ],
     templateUrl: './select-button.component.html',
     providers: [
@@ -33,13 +34,14 @@ export class SelectButtonComponent implements ControlValueAccessor {
     @Input() unselectable: boolean = false;
     @Input() tabindex: number = 0;
     @Input() multiple: boolean = false;
-    @Input() allowEmpty: boolean = true;
+    @Input() allowEmpty: boolean = false;
     @Input() style?: any;
     @Input() styleClass?: string;
     @Input() ariaLabelledBy?: string;
     @Input() disabled: boolean = false;
     @Input() dataKey?: string;
     @Input() autofocus: boolean = false;
+    @Input() size?: 'small' | 'large'
 
     @Output() onOptionClick = new EventEmitter<SelectButtonOptionClickEvent>();
     @Output() onChange = new EventEmitter<SelectButtonChangeEvent>();

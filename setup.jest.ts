@@ -1,5 +1,5 @@
 import {setupZoneTestEnv} from 'jest-preset-angular/setup-env/zone/index'
-import {User} from "@baseline/shared/models/user.model";
+import {User} from "@baseline/shared/model/user.model";
 
 setupZoneTestEnv()
 
@@ -27,7 +27,7 @@ export const mockUser: User = {
         id: 'device_id',
         lastActive: new Date(2025, 0, 1)
     }],
-    twoFactorEnabled: false,
+    twoFactorAuthEnabled: false,
     lastActive: new Date('2025-01-01'),
     app: {}
 }

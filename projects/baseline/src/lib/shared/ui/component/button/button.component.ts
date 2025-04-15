@@ -1,5 +1,5 @@
 import {booleanAttribute, Component, EventEmitter, Input, Output} from '@angular/core';
-import {Button} from 'primeng/button';
+import {Button, ButtonProps} from 'primeng/button';
 
 @Component({
     selector: 'base-button',
@@ -16,7 +16,7 @@ export class ButtonComponent {
     @Input({transform: booleanAttribute}) disabled = false;
     @Input({transform: booleanAttribute}) loading: boolean = false;
     @Input() loadingIcon?: string;
-    @Input() raised: boolean = false;
+    @Input({transform: booleanAttribute}) raised: boolean = false;
     @Input({transform: booleanAttribute}) rounded: boolean = false;
     @Input({transform: booleanAttribute}) text: boolean = false;
     @Input() severity?: 'info' | 'success' | 'warn' | 'danger' | 'secondary' | 'contrast' | 'help' | 'primary';
@@ -31,7 +31,7 @@ export class ButtonComponent {
     @Input() ariaLabel?: string;
     @Input() autofocus: boolean = false;
     @Input() fluid: boolean = false;
-    @Input() buttonProps?: any;
+    @Input() buttonProps?: ButtonProps;
 
     @Output() onClick = new EventEmitter<MouseEvent>();
     @Output() onFocus = new EventEmitter<FocusEvent>();

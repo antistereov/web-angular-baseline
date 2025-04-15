@@ -1,0 +1,15 @@
+<p-inputotp
+    [class]="(invalid ? 'ng-invalid ng-dirty' : '') + ' w-full'"
+    [(ngModel)]="value"
+    [length]="length"
+    [disabled]="disabled"
+    [autofocus]="autofocus"
+    [invalid]="invalid"
+    [styleClass]="class"
+    [integerOnly]="integerOnly"
+    (onFocus)="onFocus.emit($event)"
+    (onBlur)="onBlur.emit($event)"
+    (onChange)="change($event)"
+>
+</p-inputotp>
+<p *ngIf="displayWarning && warning" class="warning-text">{{ warning }}</p>

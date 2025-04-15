@@ -1,0 +1,38 @@
+<base-auth-card
+    [cardTitle]="'Recover'"
+    [loaded]="true"
+>
+
+    <form
+        [formGroup]="form"
+        class="flex flex-col items-center gap-4"
+    >
+        <p>Please enter your 2FA recovery code to sign in. Every code is only valid once.</p>
+        <base-input
+            formControlName="recoveryCode"
+            class="w-full"
+            [invalid]="form.getError('wrongCode')"
+            label="Recovery Code"
+        />
+
+        <div class="flex flex-col items-center w-full gap-2">
+            <base-button
+                label="Submit"
+                type="submit"
+                [disabled]="form.invalid"
+                (onClick)="recover()"
+                [loading]="loading"
+            />
+
+            <base-button
+                label="Exit"
+                (onClick)="exit()"
+                severity="secondary"
+                variant="text"
+            />
+        </div>
+
+    </form>
+
+
+</base-auth-card>

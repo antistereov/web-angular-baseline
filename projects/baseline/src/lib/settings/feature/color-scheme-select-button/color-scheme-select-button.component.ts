@@ -1,4 +1,4 @@
-import {Component, computed, inject} from '@angular/core';
+import {Component, computed, inject, Input} from '@angular/core';
 import {ColorSchemeService} from '@baseline/settings/util/color-scheme.service';
 import {FormsModule} from '@angular/forms';
 import {SelectButtonChangeEvent} from 'primeng/selectbutton';
@@ -13,6 +13,8 @@ import {SelectButtonComponent} from "@baseline/shared/ui/component/select-button
     templateUrl: './color-scheme-select-button.component.html'
 })
 export class ColorSchemeSelectButtonComponent {
+    @Input() size?: 'small' | 'large';
+
     colorSchemes: ColorSchemeOption[] = [
         { icon: 'pi pi-sun', colorScheme: 'light' },
         { icon: 'pi pi-moon', colorScheme: 'dark' },

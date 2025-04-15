@@ -2,6 +2,7 @@
     [options]="colorSchemes"
     [ngModel]="value()"
     (onChange)="onChange($event)"
+    [size]="size"
 >
     <ng-template #item let-item>
         <i [class]="item.icon"></i>

@@ -1,3 +1,5 @@
+import {FileMetaData} from "@baseline/shared/model/file.model";
+
 export interface User {
     id: string;
     name?: string;
@@ -6,8 +8,16 @@ export interface User {
     emailVerified: boolean;
     devices: DeviceInfo[];
     lastActive: Date;
-    twoFactorEnabled: boolean;
+    twoFactorAuthEnabled: boolean;
     app: ApplicationInfo;
+    avatar?: FileMetaData;
+}
+
+type MimeType = 'image/jpeg' | 'image/png' | 'image/jpg' | 'image/gif' | 'application/pdf' | 'text/plain';
+
+export interface FileResource {
+    file: Blob | File;
+    type: MimeType;
 }
 
 export interface ApplicationInfo {}

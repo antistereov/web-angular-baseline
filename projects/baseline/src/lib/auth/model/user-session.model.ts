@@ -1,4 +1,4 @@
-import {User} from '@baseline/shared/models/user.model';
+import {User} from "@baseline/shared/model/user.model";
 
 export interface DeviceInfoRequest {
     id: string;
@@ -26,4 +26,9 @@ export interface RegisterInformation extends LoginCredentials {
 
 export interface RegisterUserRequest extends RegisterInformation {
     device: DeviceInfoRequest;
+}
+
+export interface StepUpStatusResponse {
+    userId: string;
+    deviceId: string;
 }

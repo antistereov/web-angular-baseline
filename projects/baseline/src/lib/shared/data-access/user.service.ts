@@ -1,8 +1,7 @@
 import {computed, inject, Injectable, Signal, signal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {catchError, map, Observable, of, take, tap, throwError} from 'rxjs';
+import {catchError, Observable, of, take, tap, throwError} from 'rxjs';
 import {BASELINE_CONFIG} from '@baseline/core/config/base.config';
-import {User} from '@baseline/shared/models/user.model';
 import {DeviceService} from '@baseline/auth/util/device.service';
 import {Router} from '@angular/router';
 import {
@@ -12,6 +11,8 @@ import {
     RegisterInformation,
     RegisterUserRequest
 } from '@baseline/auth/model/user-session.model';
+import {User} from "@baseline/shared/model/user.model";
+import {AuthRouterService} from "@baseline/auth/util/auth-router.service";
 
 @Injectable({
   providedIn: 'root'
@@ -20,18 +21,21 @@ export class UserService {
     private httpClient = inject(HttpClient);
     private deviceService = inject(DeviceService);
     private router = inject(Router);
+    private authRouter = inject(AuthRouterService);
 
-    private apiBaseUrl = inject(BASELINE_CONFIG).apiBaseUrl;
+    private baselineConfig = inject(BASELINE_CONFIG);
+    private apiBaseUrl = this.baselineConfig.apiBaseUrl;
+    private redirectTo = this.baselineConfig.auth.redirect.login;
 
     private _user = signal<User | undefined>(undefined);
     private _userLoaded = signal<boolean>(false);
+    avatar = computed(() => this.user()?.avatar)
 
     loggedIn = computed(() => this._user() !== undefined);
 
     get user(): Signal<User | undefined> {
         return this._user;
     }
-
     get userLoaded(): Signal<boolean> {
         return this._userLoaded;
     }
@@ -52,7 +56,7 @@ export class UserService {
                 this.setUser(user);
 
                 if (!user.emailVerified) {
-                    this.router.navigate(['/auth/verify-email']).then();
+                    this.authRouter.verifyEmail();
                 }
             }),
             catchError(() => {
@@ -63,26 +67,33 @@ export class UserService {
         ).subscribe();
     }
 
-    login(credentials: LoginCredentials): Observable<User> {
+    login(credentials: LoginCredentials): Observable<LoginResponse> {
         const device = this.deviceService.getDeviceInfo();
         const loginRequest: LoginRequest = { ...credentials, device};
 
         return this.httpClient.post<LoginResponse>(`${this.apiBaseUrl}/user/login`, loginRequest).pipe(
             take(1),
-            map(res => this.handleLoginResponse(res)),
-            tap(user => this.setUser(user)),
             catchError((err: Error) => {
                 this.setUser(undefined);
                 return throwError(() => err);
-            })
+            }),
+            tap(res => this.handleLoginResponse(res))
         );
     }
 
-    private handleLoginResponse(res: LoginResponse): User {
+    private handleLoginResponse(res: LoginResponse): User | undefined {
+        console.log(res);
+
         if (res.twoFactorRequired) {
-            this.router.navigate(['auth/2fa']).then();
+            this.authRouter.verify2fa('login', this.redirectTo);
+
+            this.setUser(undefined);
+            return undefined;
         }
 
+        this.router.navigate([this.redirectTo]).then();
+
+        this.setUser(res.user);
         return res.user;
     }
 

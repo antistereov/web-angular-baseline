@@ -1,13 +1,15 @@
 import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
 import {Select, SelectChangeEvent, SelectModule} from 'primeng/select';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {NgIf} from "@angular/common";
 
 @Component({
     selector: 'base-select',
     imports: [
         Select,
         SelectModule,
-        FormsModule
+        FormsModule,
+        NgIf
     ],
     templateUrl: './select.component.html',
     providers: [
@@ -24,6 +26,7 @@ export class SelectComponent implements ControlValueAccessor {
     @Input() disabled: boolean = false;
     @Input() class?: string;
     @Input() optionLabel?: string;
+    @Input() size?: 'small' | 'large';
 
     @Output() onChange = new EventEmitter<SelectChangeEvent>();
 

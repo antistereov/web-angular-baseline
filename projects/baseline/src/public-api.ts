@@ -29,7 +29,7 @@ export * from '@baseline/settings/feature/language-select/language-select.compon
 export * from '@baseline/settings/util/color-scheme.service'
 
 export * from '@baseline/shared/data-access/user.service'
-export * from '@baseline/shared/models/user.model'
+export * from '@baseline/shared/model/user.model'
 export * from '@baseline/shared/ui/component/button/button.component'
 export * from '@baseline/shared/ui/component/card/card.component'
 export * from '@baseline/shared/ui/component/drawer/drawer.component'

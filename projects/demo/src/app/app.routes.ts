@@ -11,6 +11,10 @@ export const routes: Routes = [
         loadComponent: () => import ('./demo/page/demo.component').then(c => c.DemoComponent)
     },
     {
+        path: 'me',
+        loadComponent: () => import('./me/page/me.component').then(c => c.MeComponent)
+    },
+    {
         path: '**',
         redirectTo: '/',
         pathMatch: 'full'

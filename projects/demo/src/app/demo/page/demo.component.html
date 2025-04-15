@@ -1,63 +1,6 @@
 <div class="m-4 flex flex-col gap-y-2 items-center">
     <h1 class="text-4xl">{{ 'demo.title' | translate }}</h1>
 
-    <base-drawer
-        [(visible)]="drawerVisible"
-        title="Drawer"
-    >
-        <ng-template #footer>
-            <div class="flex flex-row w-full gap-2 items-center">
-                <div
-                    *ngIf="!userService.loggedIn(); else loggedIn"
-                    class="flex flex-row w-full gap-2"
-                >
-
-                    <base-button
-                        label="Login"
-                        (onClick)="router.navigate(['/auth/login'])"
-                        class="w-full"
-                    />
-
-                    <base-button
-                        label="Register"
-                        severity="secondary"
-                        (onClick)="router.navigate(['/auth/register'])"
-                        class="w-full"
-                    />
-                </div>
-
-                <ng-template #loggedIn class="flex flex-row w-full gap-2">
-                    <p class="w-full">{{ userService.user()?.name }}</p>
-                    <base-button
-                        text="true"
-                        severity="secondary"
-                        icon="pi pi-sign-out"
-                        baseTooltip="Sign out"
-                        (onClick)="userService.logout().subscribe()"
-                    />
-
-                </ng-template>
-
-                <base-button
-                    icon="pi pi-cog"
-                    text="true"
-                    severity="secondary"
-                />
-            </div>
-
-
-        </ng-template>
-    </base-drawer>
-
-
-    <base-button
-        (onClick)="toggleDrawer()"
-        icon="pi pi-bars"
-    />
-
-    <base-color-scheme-select-button/>
-    <base-language-select/>
-
     <h2>Input</h2>
 
     <base-input class="w-full"/>
@@ -123,4 +66,8 @@
             </div>
         </ng-template>
     </base-card>
+
+    <base-info-panel [copyEnabled]="true">
+        This is some text.
+    </base-info-panel>
 </div>

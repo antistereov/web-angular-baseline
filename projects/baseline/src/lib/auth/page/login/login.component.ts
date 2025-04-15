@@ -2,7 +2,7 @@ import {Component, effect, inject} from '@angular/core';
 import {FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UserService} from '@baseline/shared/data-access/user.service';
 import {Router} from '@angular/router';
-import {catchError, of, switchMap} from 'rxjs';
+import {catchError, of, tap} from 'rxjs';
 import {InputComponent} from '@baseline/shared/ui/component/input/input.component';
 import {ButtonComponent} from '@baseline/shared/ui/component/button/button.component';
 import {NgIf} from '@angular/common';
@@ -68,19 +68,17 @@ export class LoginComponent {
         }
 
         this.loading = true;
-        this.userService.login(this.form.value)
-            .pipe(
-                switchMap(() => {
-                    this.router.navigate([this.appConfig.auth.redirect.login]).then();
-                    return of(true);
-                }),
-                catchError(() => {
-                    this.form.setErrors({'invalid': true});
-                    this.loading = false;
-                    return of(false)
-                })
-            )
-            .subscribe()
+
+        this.userService.login(this.form.value).pipe(
+            tap(() => {
+                this.loading = false;
+            }),
+            catchError(() => {
+                this.form.setErrors({'invalid': true});
+                this.loading = false;
+                return of(false)
+            })
+        ).subscribe()
     }
 }
 

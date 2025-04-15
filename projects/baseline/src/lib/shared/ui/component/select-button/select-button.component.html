@@ -1,25 +1,56 @@
-<p-select-button
-    class="base-select-button"
-    [options]="options"
-    [optionLabel]="optionLabel"
-    [optionValue]="optionValue"
-    [optionDisabled]="optionDisabled"
-    [unselectable]="unselectable"
-    [tabindex]="tabindex"
-    [multiple]="multiple"
-    [allowEmpty]="allowEmpty"
-    [style]="style"
-    [styleClass]="styleClass"
-    [ariaLabelledBy]="ariaLabelledBy"
-    [disabled]="disabled"
-    [dataKey]="dataKey"
-    [autofocus]="autofocus"
-    (onOptionClick)="onOptionClick.emit($event)"
-    (onChange)="handleChange($event)"
-    [(ngModel)]="value"
->
-    <ng-template #item let-item>
-        <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }">
-        </ng-container>
-    </ng-template>
-</p-select-button>
+<ng-container *ngIf="size; else defaultSize">
+    <p-select-button
+        class="base-select-button"
+        [options]="options"
+        [optionLabel]="optionLabel"
+        [optionValue]="optionValue"
+        [optionDisabled]="optionDisabled"
+        [unselectable]="unselectable"
+        [tabindex]="tabindex"
+        [multiple]="multiple"
+        [allowEmpty]="allowEmpty"
+        [style]="style"
+        [styleClass]="styleClass"
+        [ariaLabelledBy]="ariaLabelledBy"
+        [disabled]="disabled"
+        [dataKey]="dataKey"
+        [autofocus]="autofocus"
+        (onOptionClick)="onOptionClick.emit($event)"
+        (onChange)="handleChange($event)"
+        [(ngModel)]="value"
+        [size]="size"
+    >
+        <ng-template #item let-item>
+            <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }">
+            </ng-container>
+        </ng-template>
+    </p-select-button>
+</ng-container>
+
+<ng-template #defaultSize>
+    <p-select-button
+        class="base-select-button"
+        [options]="options"
+        [optionLabel]="optionLabel"
+        [optionValue]="optionValue"
+        [optionDisabled]="optionDisabled"
+        [unselectable]="unselectable"
+        [tabindex]="tabindex"
+        [multiple]="multiple"
+        [allowEmpty]="allowEmpty"
+        [style]="style"
+        [styleClass]="styleClass"
+        [ariaLabelledBy]="ariaLabelledBy"
+        [disabled]="disabled"
+        [dataKey]="dataKey"
+        [autofocus]="autofocus"
+        (onOptionClick)="onOptionClick.emit($event)"
+        (onChange)="handleChange($event)"
+        [(ngModel)]="value"
+    >
+        <ng-template #item let-item>
+            <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }">
+            </ng-container>
+        </ng-template>
+    </p-select-button>
+</ng-template>
