@@ -7,13 +7,15 @@ import {tap} from "rxjs";
 import {FormsModule} from "@angular/forms";
 import {UserSettingsService} from "@baseline/settings/data-access/user-settings.service";
 import {AvatarSettingsComponent} from "@baseline/settings/feature/avatar-settings/avatar-settings.component";
+import {TwoFactorSettingsComponent} from "@baseline/settings/feature/two-factor-settings/two-factor-settings.component";
 
 @Component({
   selector: 'base-user-settings-card',
     imports: [
         CardComponent,
         FormsModule,
-        AvatarSettingsComponent
+        AvatarSettingsComponent,
+        TwoFactorSettingsComponent
     ],
   templateUrl: './user-settings-card.component.html'
 })
