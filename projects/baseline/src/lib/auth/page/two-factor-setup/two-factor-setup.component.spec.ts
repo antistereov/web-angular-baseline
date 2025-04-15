@@ -4,6 +4,7 @@ import {TwoFactorSetupComponent} from './two-factor-setup.component';
 import {provideHttpClient} from "@angular/common/http";
 import {ActivatedRoute, convertToParamMap} from "@angular/router";
 import {TranslateFakeLoader, TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {MessageService} from "primeng/api";
 
 describe('TwoFactorSetupComponent', () => {
     let component: TwoFactorSetupComponent;
@@ -26,6 +27,7 @@ describe('TwoFactorSetupComponent', () => {
             providers: [
                 provideHttpClient(),
                 { provide: ActivatedRoute, useValue: mockActivatedRoute },
+                MessageService,
             ]
         })
             .compileComponents();

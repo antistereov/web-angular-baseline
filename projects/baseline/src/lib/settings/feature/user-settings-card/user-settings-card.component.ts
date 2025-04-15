@@ -1,4 +1,4 @@
-import {Component, computed, inject, OnInit} from '@angular/core';
+import {Component, computed, inject, Input, OnInit} from '@angular/core';
 import {UserService} from "@baseline/shared/data-access/user.service";
 import {TwoFactorService} from "@baseline/auth/data-access/two-factor.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -20,9 +20,11 @@ import {TwoFactorSettingsComponent} from "@baseline/settings/feature/two-factor-
   templateUrl: './user-settings-card.component.html'
 })
 export class UserSettingsCard implements OnInit {
+    @Input() class?: string;
+    @Input() path: string = '/me';
+
     private userService = inject(UserService);
     private twoFactorService = inject(TwoFactorService);
-    private userSettingsService = inject(UserSettingsService);
     private router = inject(Router);
     private route = inject(ActivatedRoute);
 

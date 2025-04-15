@@ -12,6 +12,7 @@ import {
     RegisterUserRequest
 } from '@baseline/auth/model/user-session.model';
 import {User} from "@baseline/shared/model/user.model";
+import {AuthRouterService} from "@baseline/auth/util/auth-router.service";
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ export class UserService {
     private httpClient = inject(HttpClient);
     private deviceService = inject(DeviceService);
     private router = inject(Router);
+    private authRouter = inject(AuthRouterService);
 
     private baselineConfig = inject(BASELINE_CONFIG);
     private apiBaseUrl = this.baselineConfig.apiBaseUrl;
@@ -54,7 +56,7 @@ export class UserService {
                 this.setUser(user);
 
                 if (!user.emailVerified) {
-                    this.router.navigate(['/auth/verify-email']).then();
+                    this.authRouter.verifyEmail();
                 }
             }),
             catchError(() => {
@@ -83,7 +85,7 @@ export class UserService {
         console.log(res);
 
         if (res.twoFactorRequired) {
-            this.router.navigate(['/auth/2fa/verify'] , { queryParams: { context: 'login' } }).then();
+            this.authRouter.verify2fa('login', this.redirectTo);
 
             this.setUser(undefined);
             return undefined;

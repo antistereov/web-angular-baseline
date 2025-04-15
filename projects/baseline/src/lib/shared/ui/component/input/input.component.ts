@@ -32,6 +32,7 @@ export class InputComponent implements ControlValueAccessor {
     @Input() warning?: string;
     @Input({transform: booleanAttribute}) autofocus = false;
     @Input() label?: string;
+    @Input() autocomplete?: string;
 
     @Output() onChange = new EventEmitter<any>();
 

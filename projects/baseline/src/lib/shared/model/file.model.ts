@@ -6,6 +6,7 @@ export interface FileMetaData {
     sharedWith: SharedPermission[],
     publicUrl?: string,
     size: number,
+    uploaded: Date,
 }
 
 export interface SharedPermission {

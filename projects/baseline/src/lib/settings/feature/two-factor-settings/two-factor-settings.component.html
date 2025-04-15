@@ -3,23 +3,61 @@
 <div class="flex gap-4 items-center mt-2">
     <i class="pi pi-mobile" style="font-size: 2rem"></i>
 
-    <div class="w-full">
-        <span class="font-medium">Authenticator app</span>
-        <p class="text-sm">Use an authenticator app or browser extension to get two-factor authentication codes when prompted</p>
+    <div class="flex flex-col">
+        <div class="flex gap-4 items-center">
+            <div class="w-full">
+                <span class="font-medium">Authenticator app</span>
+                <p class="text-sm">Use an authenticator app or browser extension to get two-factor authentication codes when prompted</p>
+            </div>
+
+            <div class="flex gap-2">
+                <base-tag
+                    [value]="twoFactorEnabled() ? 'Active' : 'Inactive'"
+                    [icon]="twoFactorEnabled() ? 'pi pi-check' : undefined"
+                    [severity]="twoFactorEnabled() ? 'success' : 'secondary'"
+                />
+
+                <base-button
+                    size="small"
+                    [icon]="expanded ? 'pi pi-times' : 'pi pi-pen-to-square'"
+                    severity="secondary"
+                    (onClick)="toggle()"
+                    [loading]="editLoading"
+                />
+            </div>
+        </div>
+
+        <div
+            *ngIf="expanded"
+            class="flex gap-2 flex-col"
+        >
+            <base-divider/>
+            <span>Please enter your password to change your 2FA.</span>
+            <form
+                [formGroup]="form"
+                class="flex gap-2 w-full"
+                (ngSubmit)="submit()"
+            >
+                <base-input
+                    class="w-full"
+                    label="Password"
+                    type="password"
+                    formControlName="currentPassword"
+                    [displayWarning]="password.getError('wrong')"
+                    warning="Wrong password"
+                    autocomplete="current-password"
+                    [invalid]="password.getError('wrong') || (form.invalid && password.touched)"
+                />
+                <base-button
+                    [label]="twoFactorEnabled() ? 'Disable' : 'Enable'"
+                    type="submit"
+                    [loading]="updateLoading"
+                    [disabled]="form.invalid"
+                />
+            </form>
+        </div>
+
     </div>
-
-    <div class="flex gap-2">
-        <base-tag
-            value="Active"
-            icon="pi pi-check"
-            severity="success"
-        />
-
-        <base-button
-            size="small"
-            icon="pi pi-pen-to-square"
-            severity="secondary"
-        />
-    </div>
-
 </div>
+
+

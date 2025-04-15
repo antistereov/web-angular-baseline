@@ -15,6 +15,7 @@ import {ButtonComponent} from "@baseline/shared/ui/component/button/button.compo
 import {InfoPanelComponent} from "@baseline/shared/ui/component/info-panel/info-panel.component";
 import {HttpErrorResponse} from "@angular/common/http";
 import {InputComponent} from "@baseline/shared/ui/component/input/input.component";
+import {AlertService} from "@baseline/shared/util/alert.service";
 
 @Component({
   selector: 'base-two-factor-setup',
@@ -38,6 +39,7 @@ export class TwoFactorSetupComponent {
     private twoFactorService = inject(TwoFactorService);
     private router = inject(Router);
     private route = inject(ActivatedRoute);
+    private alertService = inject(AlertService);
 
     private readonly redirectTo: string;
 
@@ -92,6 +94,7 @@ export class TwoFactorSetupComponent {
             switchMap(() => {
                 this.loading = false;
                 this.userService.setUser(undefined);
+                this.alertService.showInfo('You were signed out.', 'You enabled 2FA. Therefore, you were signed out from all of your devices.')
                 this.router.navigate(['']).then();
                 return of(true);
             }),

@@ -15,6 +15,7 @@
         (input)="onInput($event)"
         (blur)="onTouchedFn()"
         id="input"
+        [attr.autocomplete]="autocomplete"
     />
     <small id="input-help" *ngIf="displayWarning && warning" class="warning-text">{{ warning }}</small>
 </p-floatlabel>
