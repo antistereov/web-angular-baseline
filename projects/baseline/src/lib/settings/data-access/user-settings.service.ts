@@ -1,7 +1,11 @@
 import {inject, Injectable} from '@angular/core';
 import {UserService} from "@baseline/shared/data-access/user.service";
 import {HttpClient} from "@angular/common/http";
-import {ChangeEmailRequest, ChangePasswordRequest} from "@baseline/settings/model/user-security.model";
+import {
+    ChangeEmailRequest,
+    ChangePasswordRequest,
+    ChangeUserRequest
+} from "@baseline/settings/model/user-security.model";
 import {Observable, tap} from "rxjs";
 import {BASELINE_CONFIG} from "@baseline/core/config/base.config";
 import {User} from "@baseline/shared/model/user.model";
@@ -36,6 +40,12 @@ export class UserSettingsService {
 
     changePassword(req: ChangePasswordRequest): Observable<User> {
         return this.httpClient.put<User>(`${this.apiBaseUrl}/user/me/password`, req).pipe(
+            tap((user) => this.userService.setUser(user))
+        );
+    }
+
+    changeUser(req: ChangeUserRequest): Observable<User> {
+        return this.httpClient.put<User>(`${this.apiBaseUrl}/user/me`, req).pipe(
             tap((user) => this.userService.setUser(user))
         );
     }

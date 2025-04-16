@@ -10,6 +10,9 @@ import {TwoFactorSettingsComponent} from "@baseline/settings/feature/two-factor-
 import {ChangePasswordComponent} from "@baseline/settings/feature/change-password/change-password.component";
 import {ChangeEmailComponent} from "@baseline/settings/feature/change-email/change-email.component";
 import {DividerComponent} from "@baseline/shared/ui/component/divider/divider.component";
+import {
+    GenericUserSettingsComponent
+} from "@baseline/settings/feature/generic-user-settings/generic-user-settings.component";
 
 @Component({
   selector: 'base-user-settings-card',
@@ -20,7 +23,8 @@ import {DividerComponent} from "@baseline/shared/ui/component/divider/divider.co
         TwoFactorSettingsComponent,
         ChangePasswordComponent,
         ChangeEmailComponent,
-        DividerComponent
+        DividerComponent,
+        GenericUserSettingsComponent
     ],
   templateUrl: './user-settings-card.component.html'
 })

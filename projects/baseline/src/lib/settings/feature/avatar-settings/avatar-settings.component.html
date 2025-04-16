@@ -1,4 +1,4 @@
-<div class="flex gap-2 items-center">
+<div class="flex gap-2 items-center w-full">
     <base-avatar
         [image]="avatar()?.publicUrl"
         shape="circle"
@@ -6,7 +6,13 @@
         [label]="user()?.name?.at(0)?.toUpperCase()"
     />
 
-    <div class="flex gap-2">
+    <div class="flex flex-col w-full">
+        <span class="font-medium">Your profile picture.</span>
+        <span class="text-sm">Size: {{ ((user()?.avatar?.size ?? 0) / 1024 / 1024).toPrecision(3) }}MB</span>
+        <span class="text-sm">Last update: {{ user()?.avatar?.uploaded ?? 'unknown' }}</span>
+    </div>
+
+    <div class="flex flex-col gap-2 items-center">
         <base-file-upload
             (uploadHandler)="setAvatar($event)"
             [accept]="'image/*'"
@@ -21,12 +27,17 @@
         <base-button
             icon="pi pi-times"
             severity="secondary"
+            size="small"
             [disabled]="!avatar()"
             [label]="'Delete'"
             (onClick)="deleteAvatar()"
             [loading]="deleting"
+            variant="text"
         />
     </div>
+
+
+
 
 
 </div>

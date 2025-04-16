@@ -1,0 +1,37 @@
+<h2 class="text-lg font-medium">User</h2>
+
+<div class="flex gap-4 w-full my-2 items-center">
+    <i class="pi pi-user" style="font-size: 2rem"></i>
+
+    <form
+        class="flex items-center flex-col w-full gap-4"
+        [formGroup]="form"
+        (ngSubmit)="submit()"
+    >
+        <div class="flex w-full flex-col">
+            <span class="font-medium">Your name.</span>
+            <span class="text-sm">This makes this whole experience a bit more personalized.</span>
+        </div>
+
+
+        <div class="flex w-full gap-2">
+            <base-input
+                id="email"
+                class="w-full"
+                [label]="'Name'"
+                formControlName="name"
+                autocomplete="name"
+                [invalid]="form.invalid"
+            />
+
+            <base-button
+                [icon]="'pi pi-pen-to-square'"
+                [label]="'Change'"
+                type="submit"
+                [loading]="updateLoading"
+                [disabled]="form.invalid"
+            />
+        </div>
+    </form>
+
+</div>
