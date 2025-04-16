@@ -1,7 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UserService} from '@baseline/shared/data-access/user.service';
-import {Router} from '@angular/router';
 import {BASELINE_CONFIG} from '@baseline/core/config/base.config';
 import {catchError, of, switchMap} from 'rxjs';
 import {ButtonComponent} from '@baseline/shared/ui/component/button/button.component';
@@ -9,6 +8,8 @@ import {InputComponent} from '@baseline/shared/ui/component/input/input.componen
 import {NgIf} from '@angular/common';
 import {AuthCardComponent} from '@baseline/auth/ui/auth-card/auth-card.component';
 import {TranslatePipe} from '@ngx-translate/core';
+import {AuthRouterService} from "@baseline/auth/util/auth-router.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
     selector: 'base-register',
@@ -25,7 +26,7 @@ import {TranslatePipe} from '@ngx-translate/core';
 export class RegisterComponent {
     private fb = inject(NonNullableFormBuilder);
     private userService = inject(UserService);
-    private router = inject(Router);
+    private authRouter = inject(AuthRouterService);
     private appConfig = inject(BASELINE_CONFIG);
 
     form: FormGroup;
@@ -35,7 +36,7 @@ export class RegisterComponent {
     constructor() {
         this.form = this.fb.group<RegisterForm>({
             email: this.fb.control('', [Validators.required, Validators.email]),
-            password: this.fb.control('', [Validators.required]),
+            password: this.fb.control('', [Validators.required, Validators.min(8)]),
             name: this.fb.control('', this.requireName ? [Validators.required] : [])
         });
     }
@@ -71,10 +72,13 @@ export class RegisterComponent {
         this.userService.register(this.form.value)
             .pipe(
                 switchMap(() => {
-                    this.router.navigate([this.appConfig.auth.redirect.register]).then();
+                    this.authRouter.verifyEmail();
                     return of(true);
                 }),
-                catchError(() => {
+                catchError((err: HttpErrorResponse) => {
+                    if (err.status === 409) {
+                        this.email.setErrors({'exists': true})
+                    }
                     this.form.setErrors({'invalid': true});
                     this.loading = false;
                     return of(false)

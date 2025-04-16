@@ -5,9 +5,11 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {CardComponent} from "@baseline/shared/ui/component/card/card.component";
 import {tap} from "rxjs";
 import {FormsModule} from "@angular/forms";
-import {UserSettingsService} from "@baseline/settings/data-access/user-settings.service";
 import {AvatarSettingsComponent} from "@baseline/settings/feature/avatar-settings/avatar-settings.component";
 import {TwoFactorSettingsComponent} from "@baseline/settings/feature/two-factor-settings/two-factor-settings.component";
+import {ChangePasswordComponent} from "@baseline/settings/feature/change-password/change-password.component";
+import {ChangeEmailComponent} from "@baseline/settings/feature/change-email/change-email.component";
+import {DividerComponent} from "@baseline/shared/ui/component/divider/divider.component";
 
 @Component({
   selector: 'base-user-settings-card',
@@ -15,7 +17,10 @@ import {TwoFactorSettingsComponent} from "@baseline/settings/feature/two-factor-
         CardComponent,
         FormsModule,
         AvatarSettingsComponent,
-        TwoFactorSettingsComponent
+        TwoFactorSettingsComponent,
+        ChangePasswordComponent,
+        ChangeEmailComponent,
+        DividerComponent
     ],
   templateUrl: './user-settings-card.component.html'
 })

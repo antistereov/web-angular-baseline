@@ -37,7 +37,6 @@
                 type="password"
                 class="w-full"
                 [invalid]="form.getError('invalid') || invalidAndTouched"
-                [warning]="'auth.warnings.password' | translate"
                 [displayWarning]="invalidAndTouched"
             />
         </div>
@@ -48,6 +47,6 @@
             [disabled]="loading || form.invalid"
             [loading]="loading"
         />
-        <p class="warning-text" *ngIf="form.getError('invalid')">Wrong credentials.</p>
+        <p class="warning-text" *ngIf="email.getError('exists')">This email is already associated to a user.</p>
     </form>
 </base-auth-card>>

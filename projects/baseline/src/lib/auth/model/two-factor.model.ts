@@ -17,3 +17,7 @@ export interface TwoFactorSetupRequest {
 export interface DisableTwoFactorRequest {
     password: string;
 }
+
+export interface StartTwoFactorSetupRequest {
+    password: string;
+}

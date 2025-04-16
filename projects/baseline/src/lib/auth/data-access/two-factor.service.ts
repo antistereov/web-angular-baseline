@@ -4,7 +4,7 @@ import {BASELINE_CONFIG} from "@baseline/core/config/base.config";
 import {UserService} from "@baseline/shared/data-access/user.service";
 import {catchError, Observable, take, tap, throwError} from "rxjs";
 import {
-    DisableTwoFactorRequest,
+    DisableTwoFactorRequest, StartTwoFactorSetupRequest,
     TwoFactorSetupRequest,
     TwoFactorSetupResponse,
     TwoFactorStatusResponse
@@ -27,6 +27,12 @@ export class TwoFactorService {
         return this.httpClient.get<TwoFactorSetupResponse>(`${this.apiBaseUrl}/user/2fa/setup`, {}).pipe(
             take(1)
         )
+    }
+
+    startSetup(password: string): Observable<void> {
+        const req: StartTwoFactorSetupRequest = { password: password }
+
+        return this.httpClient.post<any>(`${this.apiBaseUrl}/user/2fa/start-setup`, req);
     }
 
     setup(code: number, token: string): Observable<User> {
@@ -64,7 +70,9 @@ export class TwoFactorService {
         )
     }
 
-    disable(req: DisableTwoFactorRequest): Observable<User | undefined> {
+    disable(password: string): Observable<User | undefined> {
+        const req: DisableTwoFactorRequest = { password: password };
+
         return this.httpClient.post<User>(`${this.apiBaseUrl}/user/2fa/disable`, req).pipe(
             tap((user) => this.userService.setUser(user)),
             catchError((err: HttpErrorResponse) => {

@@ -16,6 +16,6 @@ import {SkeletonComponent} from "@baseline/shared/ui/component/skeleton/skeleton
 })
 export class AuthCardComponent {
     @Input() cardTitle: string = '';
-    @Input() loaded?: boolean = false;
+    @Input() loaded?: boolean = true;
 
 }

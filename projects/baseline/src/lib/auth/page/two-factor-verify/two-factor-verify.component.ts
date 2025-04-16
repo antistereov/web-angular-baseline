@@ -52,7 +52,6 @@ export class TwoFactorVerifyComponent {
         if (this.context === 'step-up') {
             this.twoFactorService.getStatus('step-up').pipe(
                 tap((res) => {
-                    console.log(res.twoFactorRequired)
                     if (!res.twoFactorRequired) {
                         this.router.navigate([this.redirectTo], { queryParams: { 'step-up': 'true' } }).then();
                     }

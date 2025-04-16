@@ -4,7 +4,6 @@ import {TagComponent} from "@baseline/shared/ui/component/tag/tag.component";
 import {TwoFactorService} from "@baseline/auth/data-access/two-factor.service";
 import {UserService} from "@baseline/shared/data-access/user.service";
 import {catchError, Observable, of, tap, throwError} from "rxjs";
-import {Router} from "@angular/router";
 import {AuthRouterService} from "@baseline/auth/util/auth-router.service";
 import {NgIf} from "@angular/common";
 import {InputComponent} from "@baseline/shared/ui/component/input/input.component";
@@ -31,7 +30,6 @@ export class TwoFactorSettingsComponent {
 
     private twoFactorService = inject(TwoFactorService);
     private userService = inject(UserService);
-    private router = inject(Router);
     private authRouter = inject(AuthRouterService);
 
     private fb = inject(NonNullableFormBuilder);
@@ -95,7 +93,7 @@ export class TwoFactorSettingsComponent {
     }
 
     private disable() {
-        this.twoFactorService.disable({ password: this.password.value }).pipe(
+        this.twoFactorService.disable(this.password.value).pipe(
             tap(() => {
                 this.updateLoading = false;
                 this.expanded = false;
@@ -116,6 +114,23 @@ export class TwoFactorSettingsComponent {
     }
 
     private enable() {
-        this.authRouter.setup2fa(this.path);
+        this.twoFactorService.startSetup(this.password.value).pipe(
+            tap(() => {
+                this.updateLoading = false;
+                this.expanded = false;
+                this.password.setValue('');
+                this.authRouter.setup2fa(this.path);
+            }),
+            catchError((err: HttpErrorResponse) => {
+                this.updateLoading = false;
+
+                if (err.status === 401) {
+                    this.password.setErrors({ 'wrong': true });
+                    return of()
+                }
+
+                return throwError(() => err);
+            })
+        ).subscribe()
     }
 }

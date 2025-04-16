@@ -3,6 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {MeComponent} from './me.component';
 import {provideHttpClient} from "@angular/common/http";
 import {ActivatedRoute, convertToParamMap} from "@angular/router";
+import {MessageService} from "primeng/api";
 
 describe('MeComponent', () => {
     let component: MeComponent;
@@ -19,7 +20,8 @@ describe('MeComponent', () => {
             imports: [MeComponent],
             providers: [
                 { provide: ActivatedRoute, useValue: mockActivatedRoute },
-                provideHttpClient()
+                provideHttpClient(),
+                MessageService
             ]
         })
             .compileComponents();

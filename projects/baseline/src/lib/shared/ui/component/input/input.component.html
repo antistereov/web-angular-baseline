@@ -1,7 +1,7 @@
 <p-floatlabel
     variant="on"
 >
-    <label *ngIf="label" for="input">{{ label }}</label>
+    <label *ngIf="label" [attr.for]="id">{{ label }}</label>
     <input
         [class]="(invalid ? 'ng-invalid ng-dirty' : '') + ' w-full'"
         pInputText
@@ -14,7 +14,7 @@
         [class.focused]="isFocused"
         (input)="onInput($event)"
         (blur)="onTouchedFn()"
-        id="input"
+        [attr.id]="id"
         [attr.autocomplete]="autocomplete"
     />
     <small id="input-help" *ngIf="displayWarning && warning" class="warning-text">{{ warning }}</small>

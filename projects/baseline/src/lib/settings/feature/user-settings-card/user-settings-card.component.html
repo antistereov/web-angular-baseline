@@ -7,7 +7,18 @@
 
     <div class="flex flex-col gap-2">
         <base-avatar-settings/>
-        <base-two-factor-settings/>
+
+        <base-divider/>
+
+        <base-change-email [path]="path"/>
+
+        <base-divider/>
+
+        <base-change-password [path]="path"/>
+
+        <base-divider/>
+
+        <base-two-factor-settings [path]="path"/>
     </div>
 
 </base-card>

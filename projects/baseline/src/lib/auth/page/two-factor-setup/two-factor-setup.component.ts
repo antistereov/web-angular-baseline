@@ -70,8 +70,15 @@ export class TwoFactorSetupComponent {
 
         return this.twoFactorService.getTwoFactorInfo().pipe(
             tap(() => this.infoLoaded = true),
-            catchError((err) => {
+            catchError((err: HttpErrorResponse) => {
                 this.infoLoaded = true;
+
+                if (err.status === 401) {
+                    this.alertService.showError('Access denied!', 'You need to verify who you are.');
+                    this.router.navigate([this.redirectTo]).then();
+                    return of()
+                }
+
                 return throwError(() => err);
             })
         );

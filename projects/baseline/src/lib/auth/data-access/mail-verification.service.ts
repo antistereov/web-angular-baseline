@@ -16,17 +16,17 @@ export class MailVerificationService {
     private userService = inject(UserService);
 
     verifyEmail(token: string): Observable<User> {
-        return this.http.get<User>(`${this.apiBaseUrl}/user/mail/verify-email?token=${token}`).pipe(
+        return this.http.post<User>(`${this.apiBaseUrl}/user/mail/verify?token=${token}`, {}).pipe(
             tap(user => this.userService.setUser(user))
         );
     }
 
     resendVerificationEmail(): Observable<void> {
-        return this.http.post<any>(`${this.apiBaseUrl}/user/mail/resend-verification-email`, {});
+        return this.http.post<any>(`${this.apiBaseUrl}/user/mail/verify/send`, {});
     }
 
     getRemainingCooldown(): Observable<number> {
-        return this.http.get<MailVerificationCooldownResponse>(`${this.apiBaseUrl}/user/mail/email-verification-cooldown`)
+        return this.http.get<MailVerificationCooldownResponse>(`${this.apiBaseUrl}/user/mail/verify/cooldown`)
             .pipe(map(response => response.remaining));
     }
 }
