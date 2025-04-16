@@ -1,0 +1,66 @@
+<h2 class="text-lg font-medium">Email</h2>
+
+<div class="flex gap-4 w-full my-2 items-center">
+    <i class="pi pi-envelope" style="font-size: 2rem"></i>
+
+    <form
+        class="flex items-center flex-col w-full gap-4"
+        [formGroup]="form"
+        (ngSubmit)="submit()"
+    >
+        <div class="flex w-full flex-col">
+            <span class="font-medium">Your email address.</span>
+            <span class="text-sm">It is used for sign in and for account recovery. Always keep it up to date.</span>
+        </div>
+
+
+        <div class="flex w-full gap-2">
+            <div class="flex flex-col w-full gap-2">
+                <base-input
+                    id="email"
+                    class="w-full"
+                    [label]="expanded ? 'New Email' : 'Email'"
+                    type="email"
+                    formControlName="newEmail"
+                    autocomplete="email"
+                    [invalid]="expanded && (newEmail.getError('exists') && newEmail.touched || newEmail.getError('wrong') || form.invalid && newEmail.touched)"
+                    [displayWarning]="newEmail.getError('same') || newEmail.getError('exists')"
+                    [warning]="newEmail.getError('same') ? 'This is the same email address.' : 'This email is already related to another account.'"
+                    (onChange)="emailChange($event)"
+                />
+                <base-input
+                    *ngIf="expanded"
+                    class="w-full"
+                    label="Password"
+                    type="password"
+                    formControlName="password"
+                    [displayWarning]="password.getError('wrong')"
+                    warning="Wrong password"
+                    autocomplete="current-password"
+                    [invalid]="password.getError('wrong') || (form.invalid && password.touched)"
+                />
+            </div>
+
+            <div class="flex flex-col w-fit gap-2">
+                <base-button
+                    class="w-full"
+                    [icon]="expanded ? 'pi pi-times' : 'pi pi-pen-to-square'"
+                    [label]="expanded ? 'Cancel' : 'Change'"
+                    (onClick)="toggle()"
+                    [severity]="expanded ? 'secondary' : 'primary' "
+                    [loading]="editLoading"
+                />
+                <base-button
+                    class="w-full"
+                    *ngIf="expanded"
+                    [label]="'Update'"
+                    icon="pi pi-check"
+                    type="submit"
+                    [loading]="updateLoading"
+                    [disabled]="form.invalid"
+                />
+            </div>
+        </div>
+    </form>
+
+</div>
